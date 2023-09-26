@@ -30,21 +30,7 @@ const Login = () => {
 
   return (
     <form className="form-container" onSubmit={handleSubmit}>
-      <h2>Formulario de inicio de sesión</h2>
-
-      <div className="form-group">
-        <label htmlFor="exampleInputEmail1">Email address</label>
-        <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
-        <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
-      </div>
-      <div className="form-group">
-        <label htmlFor="exampleInputPassword1">Password</label>
-        <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
-      </div>
-      <button type="submit" className="btn btn-primary">Submit</button>
-      <button type="button" className="btn btn-primary">Registrarse</button>
-      {/* </form>
-     <form className="form-container" onSubmit={handleSubmit}>      
+      {/* <img src={mercadoLogo} alt="Mercado Trucho" /> */}
       <h2>Formulario de inicio de sesión</h2>
       <div>
         <label htmlFor="username">Usuario:</label>
@@ -65,7 +51,6 @@ const Login = () => {
         />
       </div>
       <button type="submit">Iniciar sesión</button>
-      <button type="button">Registrarse</button> */}
     </form>
   );
 };
