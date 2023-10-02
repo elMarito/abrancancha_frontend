@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './LoginStyles.css'
 // import mercadoLogo from '/logo-color.svg'
 // import '../styles/login.css';
 
@@ -29,82 +30,46 @@ const Login = () => {
   };
 
   return (
-    <form className="form-container" onSubmit={handleSubmit}>
-      <h2>Formulario de inicio de sesión</h2>
+
+    <div className='container-fluid formcontent'>
+      <div className="row p-5 ">
+        <div className="col-lg-8 col-md-6 g-4 pb-3 text-center">
+          <h1>Bienvenido @Nombre_usuario</h1>
+        <img src="src/assets/abc_login.svg" alt="" width="300" />
+        </div>
+        <div className="col-lg-4 col-md-6">
+    <form className="form-container formlogin" onSubmit={handleSubmit}>
+      <p>Ingresa tus datos de acceso</p>
 
       <div className="form-group">
-        <label htmlFor="exampleInputEmail1">Email address</label>
-        <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
-        <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+        <label htmlFor="exampleInputEmail1">Email:</label>
+        <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="tu_email@ejemplo.com" />
       </div>
       <div className="form-group">
-        <label htmlFor="exampleInputPassword1">Password</label>
-        <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
+        <label htmlFor="exampleInputPassword1">Contraseña:</label>
+        <input type="password" className="form-control" id="exampleInputPassword1" placeholder="xxxxxx" />
       </div>
-      <button type="submit" className="btn btn-primary">Submit</button>
-      <button type="button" className="btn btn-primary">Registrarse</button>
-      {/* </form>
-     <form className="form-container" onSubmit={handleSubmit}>      
-      <h2>Formulario de inicio de sesión</h2>
-      <div>
-        <label htmlFor="username">Usuario:</label>
-        <input
-          type="text"
-          id="username"
-          value={username}
-          onChange={handleUsernameChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="password">Contraseña:</label>
-        <input
-          type="password"
-          id="password"
-          value={password}
-          onChange={handlePasswordChange}
-        />
-      </div>
-      <button type="submit">Iniciar sesión</button>
-      <button type="button">Registrarse</button> */}
+      <div className="d-grid">
+                  <button className="btn btn-lg ingreso_btn mb-2" type="submit">Ingresar</button>
+                  <div className="text-center">
+                    <a className="small" href="#">¿Olvidaste tu contraseña?</a>
+                  </div>
+                  <div className="text-center">
+                    <a className="small" href="#">Crear Usuario</a>
+                  </div>
+                  <div className="text-center">
+                    <a className="small" href="#"><i className="fa-brands fa-facebook-f"></i></a>
+                    <a className="small" href="#"><i className="fa-brands fa-instagram"></i></a>
+                  </div>
+                  </div>
+
+  
     </form>
+    </div>
+    </div>
+    </div>
   );
 };
 
 export default Login;
 
-// const Login = () => {
-//   const [username, setUsername] = useState('');
-//   const [password, setPassword] = useState('');
-
-//   const handleLogin = () => {
-//     // Replace this with your actual login logic
-//     if (username === 'yourUsername' && password === 'yourPassword') {
-//       alert('Login successful!');
-//     } else {
-//       alert('Invalid credentials. Please try again.');
-//     }
-//   };
-
-//   return (<div className='loginform'>
-//     <img src={mercadoLogo} alt="Mercado Trucho" />
-//     <h2>Login</h2>
-//     <div>
-//       <label htmlFor='username'>Username:</label>
-//       <input id='username'        type="text"
-//         value={username}
-//         onChange={(e) => setUsername(e.target.value)}
-//       />
-//     </div>
-//     <div>
-//       <label htmlFor='password'>Password:</label>
-//       <input id='password'        type="password"
-//         value={password}
-//         onChange={(e) => setPassword(e.target.value)}
-//       />
-//     </div>
-//     <button onClick={handleLogin}>Login</button>
-//   </div>
-//   );
-// };
-
-// export default Login;

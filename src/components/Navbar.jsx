@@ -15,7 +15,7 @@ function Navbar() {
       <BrowserRouter>
         <nav className="navbar navbar-expand-lg  static-top">
           <div className="container ">
-            <Link to="#" className="navbar-brand"><img src="/abc_logo.svg" alt="" width="90" /></Link>
+            <Link to="/index.html" className="navbar-brand"><img src="src/assets/abc_logo.svg" alt="" width="90" /></Link>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
             </button>
