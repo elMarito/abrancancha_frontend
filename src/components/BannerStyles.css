@@ -1,0 +1,49 @@
+* {
+    font-family: "Bebas Neue", ;
+
+}
+
+img.card-img {
+    filter: opacity(0.6);
+}
+
+.card-img-overlay {
+    display: block;
+    margin-left: 5%;
+    margin-top: 5%;
+}
+
+h4.card-title {
+    font-size: 4em;
+    color: #77da7e;
+    margin-bottom: -0.5em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    user-select: none;
+}
+
+p.card-text {
+    font-size: 4em;
+    color: #fbfbfb;
+    margin-bottom: -0.5em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    user-select: none;
+}
+
+
+
+@media (max-width: 768px) {
+    .card-img-overlay {
+        margin-left: 2%;
+        
+    }
+
+    h4.card-title {
+        font-size: 1.5em;
+       
+    }
+
+    p.card-text {
+        font-size: 1.5em;
+        
+    }
+}
