@@ -44,7 +44,7 @@ h1 {
   font-family: "Bebas Neue", sans-serif;
   font-weight: 900;
   border: none;
-  padding: 10px 60px 10px 60px;
+  padding: 10px 30px 10px 30px;
   border-radius: 5px;
   text-transform: uppercase;
   margin: 0 auto;
@@ -54,7 +54,16 @@ h1 {
   color: #77da7e;
 }
 
+.gray {
+  background-color: #cccccc;
+  color: #1d1d1d;
+}
+
 .fa-brands {
   color: #77da7e;
   padding: 5px;
+}
+
+.fa-user {
+  color: #fff;
 }
