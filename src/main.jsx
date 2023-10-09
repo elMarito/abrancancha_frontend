@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import Navbar from './components/Navbar.jsx'
 // import App from './App.jsx'
 import Banner from './components/Banner.jsx'
-
+import ImgGallery from './components/ImgGallery.jsx';
 
 
 
@@ -15,6 +15,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       </BrowserRouter> */}
       <Navbar />
       <Banner/>
+      <ImgGallery />
     {/* </AppContextProvider> */}
   </React.StrictMode>,
 )
