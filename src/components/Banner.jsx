@@ -1,22 +1,36 @@
-import React, { Component } from "react";
-import { BrowserRouter, Link } from "react-router-dom";
-import "./BannerStyles.css"
+import React, { useState, useEffect } from "react";
+import "./BannerStyles.css";
 
-function Banner() {
+
+
+  function Banner() {
     return (
-      <div class="card text-bg-dark">
-        <img
-          src="https://s1.significados.com/foto/imagen-de-destaque-que-es-el-futbol.-jugadores-y-balon.jpg?class=ogImageWide"
-          class="card-img"
-          alt="..."
+      <div className="card text-bg-dark">
+      <video autoPlay loop muted className="card-video">
+        <source
+          src='./public/Videos/pexels-saruul-saruulaa-5489581 (1080p) - copia.mp4'
+          type="video/mp4"
         />
-        <div class="card-img-overlay">
-          <h4 class="card-title">TU RESERVA</h4>
-          <p class="card-text">A UN CLICK</p>
-          <p class="card-text">DE DISTANCIA</p>
-        </div>
+        Tu navegador no soporta el tag de video.
+      </video>
+      <div className="card-img-overlay">
+        <h4 className="card-title">TU RESERVA</h4>
+        <p className="card-text">A UN CLICK</p>
+        <p className="card-text">DE DISTANCIA</p>
       </div>
-    );
-}
+    </div>
+    )
+  };
+  export default Banner
 
-export default Banner;
+
+
+
+
+
+
+
+  
+
+
+
