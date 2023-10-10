@@ -4,10 +4,10 @@ import './LoginStyles.css'
 // import '../styles/login.css';
 
 const Login = () => {
-  /*
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-
+ 
+  const [email, setEmail] = useState('');
+  const [pass, setPass] = useState('');
+ /*
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
   };
@@ -16,25 +16,21 @@ const Login = () => {
     setPassword(e.target.value);
   };
 
-  
+  */
   const handleSubmit = (e) => {
     e.preventDefault();
     // Aquí puedes implementar la lógica para enviar los datos de inicio de sesión al servidor
     // Por ejemplo, puedes usar una función para hacer una solicitud HTTP con axios o fetch.
-    console.log('Username:', username);
-    console.log('Password:', password);
-    // Replace this with your actual login logic
-    if (username === 'yourUsername' && password === 'yourPassword') {
-      alert('Login successful!');
-    } else {
-      alert('Invalid credentials. Please try again.');
-    }
+    console.log(email);
+    
   };
-  */
+  
 
   
-    const [action, setAction] = useState("Ingresa tus datos de acceso");
-  
+    const [action, setAction] = useState(true);
+ 
+  const mensaje = action ? 'Ingresa los datos de acceso' : 'Crear Usuario'
+
 
   return (
 
@@ -47,11 +43,11 @@ const Login = () => {
         <img src="src/assets/abc_login.svg" alt="" width="300" />
         </div>
         <div className="col-lg-4 col-md-6">
-    <form className="form-container formlogin" onSubmit="">
-      <p>{action}</p>
+    <form className="form-container formlogin" onSubmit={handleSubmit}>
+      <p>{mensaje}</p>
 
 
-    {action === "Ingresa tus datos de acceso" ? <div></div>:<><div className="form-group">
+    {action === true ? <div></div>:<><div className="form-group">
               <label htmlFor="exampleInputNombre1">Nombre:</label>
               <input type="text" className="form-control" id="exampleInputNombre1" placeholder="Nombre Completo" />
             </div><div className="form-group">
@@ -62,18 +58,18 @@ const Login = () => {
 
       <div className="form-group">
         <label htmlFor="exampleInputEmail1">Email:</label>
-        <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="tu_email@ejemplo.com" />
+        <input value={email} onChange={(e)=> setEmail(e.target.value)} type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="tu_email@ejemplo.com" />
       </div>
       <div className="form-group">
         <label htmlFor="exampleInputPassword1">Contraseña:</label>
-        <input type="password" className="form-control" id="exampleInputPassword1" placeholder="xxxxxx" />
+        <input value={pass} onChange={(e)=> setPass(e.target.value)} type="password" className="form-control" id="exampleInputPassword1" placeholder="xxxxxx" />
       </div>
      
       <div className="d-grid gap-2 p-3 d-sm-flex justify-content-sm-center">
-      <button className={action === "Ingresa tus datos de acceso"? "ingreso_btn gray": "ingreso_btn"} onClick={()=>{setAction("Ingresa tus datos de acceso")}}  type="submit">Ingresar</button>
-      <button className= {action === "Crear Usuario"? "ingreso_btn gray": "ingreso_btn"} onClick={()=>{setAction("Crear Usuario")}} type="submit">Crear usuario</button>
+      <button className={action === true? "ingreso_btn gray": "ingreso_btn"} onClick = {()=>setAction(true)}type="submit">Ingresar</button>
+      <button className= {action === false? "ingreso_btn gray": "ingreso_btn"} onClick = {()=>setAction(false)}type="submit">Crear usuario</button>
       </div>
-                 {action ==="Crear Usuario"?<div></div>:<div className="text-center">
+                 {action ===false?<div></div>:<div className="text-center">
                     <a className="small" href="#">¿Olvidaste tu contraseña?</a>
                   </div>}
                   
