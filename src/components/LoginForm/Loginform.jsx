@@ -3,7 +3,7 @@ import './LoginStyles.css'
 // import mercadoLogo from '/logo-color.svg'
 // import '../styles/login.css';
 
-const Login = () => {
+const LoginForm = () => {
  
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
@@ -90,5 +90,5 @@ const Login = () => {
 };
 
 
-export default Login;
+export default LoginForm;
 

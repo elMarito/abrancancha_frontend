@@ -5,10 +5,10 @@ import "./BannerStyles.css";
 
   function Banner() {
     return (
-      <div className="card text-bg-dark">
+      <div className=" text-bg-dark">
       <video autoPlay loop muted className="card-video">
         <source
-          src='./public/Videos/pexels-saruul-saruulaa-5489581 (1080p) - copia.mp4'
+          src='src/assets/pexels-saruul-saruulaa-5489581 (1080p) - copia.mp4'
           type="video/mp4"
         />
         Tu navegador no soporta el tag de video.
@@ -20,7 +20,7 @@ import "./BannerStyles.css";
       </div>
     </div>
     )
-  };
+  }
   export default Banner
 
 

@@ -3,9 +3,9 @@ import './NavbarStyles.css'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import { useState } from "react";
 import DatePicker from "react-datepicker";
-
+import Home from '../Home/Home';
 import "react-datepicker/dist/react-datepicker.css";
-import Login from '../LoginForm/Login';
+import Login from '../Login/Login';
 // import Register from './Register';
 
 function Navbar() {
@@ -60,7 +60,7 @@ function Navbar() {
           </div>
         </nav>
         <Routes>
-          {/* <Route path="/" element={<Home />} /> */}
+          { <Route path="/" element={<Home />} /> }
           {/* <Route path="/reservar" element={<Reserve />} /> */}
           <Route path="/login" element={<Login />} />
           {/* <Route path="/registro" element={<Register />} /> */}

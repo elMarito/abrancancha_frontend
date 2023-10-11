@@ -1,5 +1,4 @@
 import React from 'react';
-import { FaFacebook, FaInstagram } from 'react-icons/fa';
 import './FooterStyles.css';
 
 function Footer() {
@@ -22,12 +21,11 @@ function Footer() {
 
       <div className="right-section">
         <div className="social-logos">
-          <FaFacebook className="social-icon" />
-          <span className="social-text">Facebook</span>
+        <a className="small" href="#"><i className="fa-brands fa-facebook-f"></i></a>
+                    
         </div>
         <div className="social-logos">
-          <FaInstagram className="social-icon" />
-          <span className="social-text">Instagram</span>
+        <a className="small" href="#"><i className="fa-brands fa-instagram"></i></a>
         </div>
       </div>
     </footer>
