@@ -1,0 +1,41 @@
+.card-video {
+  max-height: 500px;
+  width: 100%;
+  object-fit: cover;
+  filter: opacity(0.6);
+}
+
+.card-img-overlay {
+  display: block;
+  top: 20%;
+  margin-left: 5%;
+  margin-top: 5%;
+}
+
+h4.card-title,
+p.card-text {
+  font-size: 4em;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  user-select: none;
+}
+
+h4.card-title {
+  color: #77da7e;
+  margin-bottom: -0.5em;
+}
+
+p.card-text {
+  color: #fbfbfb;
+  margin-bottom: -0.5em;
+}
+
+@media (max-width: 768px) {
+  .card-img-overlay {
+    margin-left: 2%;
+  }
+
+  h4.card-title,
+  p.card-text {
+    font-size: 2.5em;
+  }
+}
