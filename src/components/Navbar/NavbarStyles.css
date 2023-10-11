@@ -5,6 +5,7 @@
   display: flex;
   justify-content: space-between;
   width: 80%;
+  align-items: center;
 }
 
 a.nav-link {
@@ -30,6 +31,10 @@ a.nav-link.active {
   color: #77da7e;
 }
 
+.react-datepicker-wrapper input {
+  max-width: 90px;
+}
+
 .react-datepicker__input-container input,
 .custom-select {
   font-size: 1.3rem;
@@ -37,11 +42,7 @@ a.nav-link.active {
   color: #1d1d1d;
   font-family: "Bebas Neue", sans-serif;
   border: none;
-  max-width: 90px;
   margin-top: 5px;
-}
-.custom-select {
-  margin-top: 10px;
 }
 
 .login_btn {
@@ -49,6 +50,54 @@ a.nav-link.active {
   color: #ffffff;
   font-family: "Bebas Neue", sans-serif;
   border: none;
-  padding: 0px 40px 0px 40px;
+  padding: 10px 30px 10px 30px;
   border-radius: 5px;
+}
+
+.login_btn:hover {
+  background-color: #1d1d1d;
+  color: #77da7e;
+}
+
+.search_btn {
+  background-color: #1d1d1d;
+  color: #77da7e;
+  font-family: "Bebas Neue", sans-serif;
+  border: none;
+  padding: 0px 30px 0px 30px;
+  border-radius: 5px;
+}
+
+.search_btn:hover {
+  background-color: #77da7e;
+  color: #ffffff;
+}
+
+.fa-regular {
+  color: #77da7e;
+  padding: 5px;
+}
+
+.fa-user {
+  color: #fff;
+  padding-right: 10px;
+}
+
+.react-datepicker__header {
+  background-color: #77da7e !important;
+  font-family: "Bebas Neue", sans-serif;
+  color: #1d1d1d;
+}
+
+.react-datepicker__day--selected {
+  background-color: #77da7e !important;
+}
+
+@media screen and (max-width: 980px) {
+  .navbar-nav {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: flex-end;
+  }
 }
