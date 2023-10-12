@@ -1,0 +1,65 @@
+.formcontent {
+  background-color: #77da7e;
+}
+
+.formlogin {
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.formlogin p {
+  font-family: "Inter", sans-serif;
+  text-align: center;
+  color: #1d1d1d;
+}
+
+.formlogin label,
+.small {
+  font-family: "Inter", sans-serif;
+  color: #1d1d1d;
+}
+
+.formlogin input {
+  border: 1px solid #1d1d1d;
+}
+
+.form-group {
+  padding: 10px;
+}
+
+.formlogin ::placeholder {
+  color: #cccccc;
+}
+
+h1 {
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.ingreso_btn {
+  background-color: #77da7e;
+  color: #1d1d1d;
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 900;
+  border: none;
+  padding: 10px 30px 10px 30px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  margin: 0 auto;
+}
+.ingreso_btn:hover {
+  background-color: #1d1d1d;
+  color: #77da7e;
+}
+
+.gray {
+  background-color: #cccccc;
+  color: #1d1d1d;
+}
+
+.fa-brands {
+  color: #77da7e;
+  padding: 5px;
+}

@@ -1,0 +1,103 @@
+.navbar {
+  box-shadow: 2px 2px 20px 0px #1d1d1d;
+}
+.navbar-nav {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  align-items: center;
+}
+
+a.nav-link {
+  text-decoration: none;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #1d1d1d;
+  font-family: "Bebas Neue", sans-serif;
+}
+a.nav-link.active {
+  border-bottom: 2px solid #77da7e;
+}
+
+.dropdown-toggle::after {
+  display: inline-block;
+  margin-left: 0.255em;
+  vertical-align: 0.255em;
+  content: "";
+  border-top: 0.3em solid;
+  border-right: 0.3em solid transparent;
+  border-bottom: 0;
+  border-left: 0.3em solid transparent;
+  color: #77da7e;
+}
+
+.react-datepicker-wrapper input {
+  max-width: 90px;
+}
+
+.react-datepicker__input-container input,
+.custom-select {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #1d1d1d;
+  font-family: "Bebas Neue", sans-serif;
+  border: none;
+  margin-top: 5px;
+}
+
+.login_btn {
+  background-color: #77da7e;
+  color: #ffffff;
+  font-family: "Bebas Neue", sans-serif;
+  border: none;
+  padding: 10px 30px 10px 30px;
+  border-radius: 5px;
+}
+
+.login_btn:hover {
+  background-color: #1d1d1d;
+  color: #77da7e;
+}
+
+.search_btn {
+  background-color: #1d1d1d;
+  color: #77da7e;
+  font-family: "Bebas Neue", sans-serif;
+  border: none;
+  padding: 0px 30px 0px 30px;
+  border-radius: 5px;
+}
+
+.search_btn:hover {
+  background-color: #77da7e;
+  color: #ffffff;
+}
+
+.fa-regular {
+  color: #77da7e;
+  padding: 5px;
+}
+
+.fa-user {
+  color: #fff;
+  padding-right: 10px;
+}
+
+.react-datepicker__header {
+  background-color: #77da7e !important;
+  font-family: "Bebas Neue", sans-serif;
+  color: #1d1d1d;
+}
+
+.react-datepicker__day--selected {
+  background-color: #77da7e !important;
+}
+
+@media screen and (max-width: 980px) {
+  .navbar-nav {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: flex-end;
+  }
+}
