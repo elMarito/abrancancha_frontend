@@ -16,6 +16,41 @@ const CanchaAvailability = () => {
     setDisponibilidad(disponibilidad);
   };
 
+  // Función simulada para obtener la disponibilidad de las canchas
+const fetchAvailability = (canchaType, fecha, horario) => {
+    // Supongamos que tienes una lista de disponibilidad de canchas en forma de objetos
+    const availabilityData = [
+      {
+        tipo: 'cancha1',
+        fecha: '2023-10-16',
+        horario: '09:00',
+      },
+      {
+        tipo: 'cancha1',
+        fecha: '2023-10-16',
+        horario: '10:00',
+      },
+      {
+        tipo: 'cancha2',
+        fecha: '2023-10-16',
+        horario: '09:00',
+      },
+      // Agrega más datos de disponibilidad según tus necesidades
+    ];
+  
+    // Filtra los datos según los parámetros proporcionados
+    const filteredData = availabilityData.filter((item) => {
+      return item.tipo === canchaType && item.fecha === fecha && item.horario === horario;
+    });
+  
+    // Devuelve una lista de horarios disponibles
+    const horariosDisponibles = filteredData.map((item) => item.horario);
+  
+    return horariosDisponibles;
+  };
+  
+  
+
   // Utiliza useEffect para ejecutar la búsqueda cuando cambien los valores de canchaType, fecha o horario.
   useEffect(() => {
     buscarDisponibilidad();
@@ -26,22 +61,30 @@ const CanchaAvailability = () => {
       <h1>Búsqueda de disponibilidad de canchas</h1>
       <div>
         <label>Tipo de Cancha:</label>
-        <select value={canchaType} onChange={(e) => setCanchaType(e.target.value)}>
+        <select className="custom-select" value={canchaType} onChange={(e) => setCanchaType(e.target.value)}>
           <option value="">Seleccione un tipo de cancha</option>
-          <option value="cancha1">Cancha 1</option>
-          <option value="cancha2">Cancha 2</option>
+          <option  value="Futbol5">Futbol 5</option>
+          <option  value="Futbol7">Futbol 7</option>
+          <option  value="Futbol9">Futbol 9</option>
+          <option  value="Futbol11">Futbol 11</option>
+          <option value="Padel"> Padel</option>
           {/* Agrega más opciones de tipo de cancha según tus necesidades */}
         </select>
       </div>
       <div>
         <label>Fecha:</label>
-        <input type="date" value={fecha} onChange={(e) => setFecha(e.target.value)} />
+        <input className="custom-select"  type="date" value={fecha} onChange={(e) => setFecha(e.target.value)} />
       </div>
       <div>
         <label>Horario:</label>
-        <input type="time" value={horario} onChange={(e) => setHorario(e.target.value)} />
+        <select className="custom-select">
+                      <option selected value="8:00">8:00</option>
+                      <option value="8:30">8:30</option>
+                      <option value="9:00">9:00</option>
+                      <option value="9:30">9:30</option>
+                    </select>
       </div>
-      <button onClick={buscarDisponibilidad}>Buscar</button>
+      <button className='search_btn' onClick={buscarDisponibilidad}>Buscar</button>
       <div>
         <h2>Disponibilidad:</h2>
         <ul>
