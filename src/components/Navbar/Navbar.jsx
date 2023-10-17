@@ -6,6 +6,7 @@ import DatePicker from "react-datepicker";
 import Home from '../Home/Home';
 import "react-datepicker/dist/react-datepicker.css";
 import Login from '../Login/Login';
+import UserReservations from '../Reservas/UserReservations'
 // import Register from './Register';
 
 function Navbar() {
@@ -53,7 +54,7 @@ function Navbar() {
                   </li>
                 </li>
 
-                <Link to="/login" className="nav-link" aria-current="page" href="#"><button className='search_btn'>Buscar Cancha</button></Link>
+                <Link to="/search" className="nav-link" aria-current="page" href="#"><button className='search_btn'>Buscar Cancha</button></Link>
                 <Link to="/login" className="nav-link" aria-current="page" href="#"><button className='login_btn'> <i className="fa-regular fa-user"></i>Login</button></Link>
               </ul>
             </div>
@@ -65,6 +66,7 @@ function Navbar() {
           <Route path="/login" element={<Login />} />
           {/* <Route path="/registro" element={<Register />} /> */}
           {/* <Route path="/contacto" element={<Contacto />} /> */}
+          <Route path="/search" element={<UserReservations />} />
         </Routes>
       </BrowserRouter>
     </>

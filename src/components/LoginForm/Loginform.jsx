@@ -7,16 +7,6 @@ const LoginForm = () => {
  
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
- /*
-  const handleUsernameChange = (e) => {
-    setUsername(e.target.value);
-  };
-
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
-
-  */
   const handleSubmit = (e) => {
     e.preventDefault();
     // Aquí puedes implementar la lógica para enviar los datos de inicio de sesión al servidor
