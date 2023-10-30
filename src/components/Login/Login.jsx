@@ -7,7 +7,7 @@ function Login() {
     <>
    
     <LoginForm></LoginForm>
-    <Footer></Footer>
+    {/* <Footer></Footer> */}
     </>
   )
 }

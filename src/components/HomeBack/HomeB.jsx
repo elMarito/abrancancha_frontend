@@ -1,30 +1,47 @@
 import React from 'react'
-import Navbar from './components/Navbar.jsx'
-import Canchas from './canchas.jsx'
-export const HomeB = () => {
+import { Routes, Route } from 'react-router-dom';
+
+import NavBarBack from './NavbarBack.jsx'
+import Canchas from './Canchas/Canchas.jsx'
+import Disponibilidad from './Disponibilidad';
+import Administradores from './Administradores.jsx';
+import Reservas from './Reservas.jsx';
+// import Footer from '../Footer/Footer.jsx';
+import Cronograma from './Cronograma.jsx';
+import Configuracion from './Configuracion.jsx';
+import PrivateRoute from '../PrivateRoute.jsx';
+
+function HomeB() {
+  // const isAuthenticated = false;
+
   return (
     <div>
-        <header>
-      {/* <NavBar /> */}
-    </header>
-    <main id='body'>
-      <Canchas/>
-      <Routes>
-        {/* <Switch>*/}
-        <Route exact path='/' element={<HomeB />} />
-        {/* <Route path='/Canchas' element={<Canchas />} /> */}
-        {/* <Route path='/Products/:id' element={<Product />} /> */}
-        {/* <Route path='/User' element='<User/>'/> */}
-        <Route path='/Login' element={<Login/>}/>
-        {/* <Route path="*" component={NotFound} /> */}
-        {/* </Switch>  */}
-      </Routes>
-    </main>
-    {/* <div id='footer'></div> */}
-    {/* <footer>
-      <img src='/logo-no-background.svg' alt="logo Mercado Trucho" />
-      <p>Copyright Mario Patronelli</p>
-    </footer>   */}
+      <header>
+        <NavBarBack />
+      </header>
+      <main id='body'>
+        <Routes>
+          {/* <PrivateRoute exact path="cronograma" element={<Cronograma />} /> */}
+          {/* {isAuthenticated ? (
+            <> */}
+            <Route path="cronograma" element={<Cronograma />} />
+            <Route path="canchas" element={<Canchas />} />
+            {/* <Route path="canchas/:id" element={<Canchas id={1}/>} /> */}
+            <Route path="disponibilidad" element={<Disponibilidad />} />
+            <Route path="administradores" element={<Administradores />} />
+            <Route path="reservas" element={<Reservas />} />
+            <Route path="configuracion" element={<Configuracion />} />
+          {/* ):(
+            <Navigate to="/login" />
+          ) */}
+          {/* } */}
+          {/* <Route path='/Products/:id' element={<Product />} /> */}
+          {/* <Route path='/User' element='<User/>'/> */}
+          {/* <Route path='/Login' element={<Login/>}/> */}
+          {/* <Route path="*" component={NotFound} /> */}
+        </Routes>
+      </main>
     </div>
   )
 }
+export default HomeB

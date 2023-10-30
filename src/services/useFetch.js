@@ -1,4 +1,14 @@
 import { useState, useEffect } from "react";
+const BASE_URL = "http://localhost:3030/"
+export const ENDPOINTS = {
+    clubes: "clubes",
+    tipos_cancha: "tipos_cancha",
+    canchas_club: "canchas_club",
+    estados_usuario: "estados_usuario",
+    usuarios: "usuarios",
+    administradores: "administradores",
+    disponibilidad: "disponibilidad",
+    reservas: "reservas"};
 
 export function useFetch(url) {
     // Basic
