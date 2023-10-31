@@ -21,7 +21,7 @@ function Navbar() {
             </button>
             <div className="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
               <ul className="navbar-nav ">
-
+          
                 <li className="nav-item dropdown">
                   <li className="nav-item">
                     <select className="custom-select">
