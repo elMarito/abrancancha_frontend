@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import './LoginStyles.css'
+import Swal from 'sweetalert2';
 // import mercadoLogo from '/logo-color.svg'
 // import '../styles/login.css';
+
+const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+const [showErrorAlert, setShowErrorAlert] = useState(false);
+
 
 const LoginForm = () => {
  
@@ -19,8 +24,12 @@ const LoginForm = () => {
   */
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Aquí puedes implementar la lógica para enviar los datos de inicio de sesión al servidor
-    // Por ejemplo, puedes usar una función para hacer una solicitud HTTP con axios o fetch.
+    Swal.fire({
+      icon: 'success',
+      title: 'Éxito',
+      text: 'Los datos se han enviado correctamente',
+    });
+    
     console.log(email);
     
   };
