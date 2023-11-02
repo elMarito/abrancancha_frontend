@@ -67,7 +67,7 @@ function Navbar({setIsAuthenticated}) {
                   </li>
                 </li>
 
-                <Link to="/canchas" className="nav-link" aria-current="page" href="#"><button className='search_btn'>Buscar Cancha</button></Link>
+                <Link to="/buscar-canchas" className="nav-link" aria-current="page" href="#"><button className='search_btn'>Buscar Cancha</button></Link>
                 {userloger ?(
                   <Link to="/" className="nav-link" aria-current="page" href="#"><button onClick={logout} className='login_btn'> <i className="fa-regular fa-user"></i>Logout</button></Link>
                 

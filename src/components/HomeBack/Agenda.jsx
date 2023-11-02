@@ -2,7 +2,7 @@ import React from 'react'
 
 const Agenda = () => {
   return (
-    <div>Agenda</div>
+    <h1>Agenda</h1>
   )
 }
 
