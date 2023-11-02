@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './LoginStyles.css';
+import Navbar from '../Navbar/Navbar';
+import Footer from '../Footer/Footer';
 
 const Login = ({ setIsAuthenticated }) => {
   const [email, setEmail] = useState('');
@@ -19,6 +21,8 @@ const Login = ({ setIsAuthenticated }) => {
   };
 
   return (
+    <>
+    <Navbar />
     <div className="container-fluid formcontent">
       <div className="row p-5">
         <div className="col-lg-8 col-md-6 g-4 pb-3 text-center">
@@ -115,6 +119,8 @@ const Login = ({ setIsAuthenticated }) => {
         </div>
       </div>
     </div>
+    <Footer/>
+    </>
   );
 };
 

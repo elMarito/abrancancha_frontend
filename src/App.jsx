@@ -3,8 +3,7 @@ import Home from './components/Home/Home'
 import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Login from './components/LoginForm/Login'
-import Canchas from './components/Canchas/Canchas'
-import Navbar from './components/Navbar/Navbar'
+import NavBarBack from './components/HomeBack/NavbarBack'
 import ProtectedRoute from './components/ProtectedRoute'
 
 function App() {
@@ -12,12 +11,13 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Navbar />
+      
       <Routes>
         <Route index element={<Home />} />
         <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
         <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
-          <Route path="/canchas" element={<Canchas />} />
+          <Route path="/canchas" element={<NavBarBack />} />
+          
         </Route>
       </Routes>
     </BrowserRouter>
