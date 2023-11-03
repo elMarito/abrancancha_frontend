@@ -1,5 +1,5 @@
 import React from 'react'
-
+import NavBarBack from '../HomeBack/NavbarBack';
 const Configuracion = () => {
   // "id": 1,
   // "nombre": "Club Uno",
@@ -12,6 +12,8 @@ const Configuracion = () => {
 //https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#the-constraint-validation-api
 
   return (
+    <>
+    <NavBarBack />
     <div className="container-fluid">
       <form className="row g-3">
         <div className="col-md-4">
@@ -80,6 +82,7 @@ const Configuracion = () => {
         </div>
       </form>
     </div>
+    </>
   )
 }
 

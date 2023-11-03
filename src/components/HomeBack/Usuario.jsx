@@ -1,9 +1,12 @@
 import React from 'react'
+import NavBarBack from './NavbarBack';
 
 const Usuario = ({data}) => {
     const { id, nombre, email, telefono, estado } = data;
     console.log(data);
     return (
+        <>
+        <NavBarBack/>
         <tr>
             <td>{id}</td>
             {/* <td>{idClub}</td> */}
@@ -23,6 +26,7 @@ const Usuario = ({data}) => {
                 </button>
             </td>
         </tr>
+        </>
     );
 }; 
 

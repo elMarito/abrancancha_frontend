@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
+import NavBarBack from "./NavbarBack";
 
 const Disponibilidad = () => {
   return (
+    <>
+    <NavBarBack/>
     <table className="table table-sm table-hover">
       <thead>
         <tr>
@@ -42,6 +45,7 @@ const Disponibilidad = () => {
         </tr>
       </tbody>
     </table>
+    </>
   )
 }
 export default Disponibilidad

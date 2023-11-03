@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import Usuario from "./Usuario";
+import NavBarBack from '../HomeBack/NavbarBack';
 
 // import { appContext } from '../../context/appContext';
 //-----------------------------------------------------------------------------
@@ -29,6 +30,7 @@ const Administradores = () => {
 
   return (
     <>
+     <NavBarBack />
       <button type="button" className="edit btn btn-primary" >
         <i className="fa-regular fa-pen-to-square">Agregar administradores</i>
       </button>
