@@ -5,23 +5,75 @@ import Footer from '../Footer/Footer';
 
 const Login = ({ setIsAuthenticated }) => {
   const [email, setEmail] = useState('');
-  const [pass, setPass] = useState('');
-  const [action, setAction] = useState(true);
+  const [password, setPassword] = useState('');
+  const [isRegistering, setIsRegistering] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-   // Supongamos que el inicio de sesión es exitoso
-    setIsAuthenticated(true);
+
+    if (email && password) {
+      try {
+        const response = await fetch('http://localhost:3030/usuarios', {
+          method: 'GET',
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          const user = data.find((user) => user.email === email && user.password === password);
+          Swal.fire(
+            'Acceso correcto',
+            ' Jugador ingresado con éxito',
+            'success',
+          );
+          if (user) {
+            setIsAuthenticated(true);
+          } else {
+            Swal.fire('Error', 'No se pudo aceder', 'error');
+          }
+        }
+      } catch (error) {
+        // Manejar errores de conexión a la API
+      }
+    }
   };
 
-  const mensaje = action ? 'Ingresa los datos de acceso' : 'Crear Usuario';
+  const handleRegister = async (e) => {
+    e.preventDefault();
 
-  const toggleAction = (newAction) => {
-    setAction(newAction);
+    if (email && password) {
+      try {
+        const response = await fetch('http://localhost:3030/usuarios', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email, password }),
+        });
+
+        if (response.ok) {
+          setIsAuthenticated(true);
+          Swal.fire(
+            'Registro correcto',
+            ' Jugador registrado con éxito',
+            'success',
+          );
+        } else {
+          Swal.fire('Error', 'No se pudo Registrar al jugador', 'error');
+        }
+      } catch (error) {
+        Swal.fire('Error', 'No se pudo Registrar al jugador', 'error');
+      }
+    }
   };
+
+  const toggleRegister = () => {
+    setIsRegistering(!isRegistering);
+  };
+
+  const mensaje = isRegistering ? 'Crear Usuario' : 'Ingresa los datos de acceso';
 
   return (
-    <>
+  <>
     <Navbar />
     <div className="container-fluid formcontent">
       <div className="row p-5">
@@ -30,31 +82,33 @@ const Login = ({ setIsAuthenticated }) => {
           <img src="src/assets/abc_login.svg" alt="" width="300" />
         </div>
         <div className="col-lg-4 col-md-6">
-          <form className="form-container formlogin" onSubmit={handleSubmit}>
+          <form
+            className="form-container formlogin"
+            onSubmit={isRegistering ? handleRegister : handleLogin}
+          >
             <p>{mensaje}</p>
-
-            {!action && (
-              <>
-                <div className="form-group">
-                  <label htmlFor="exampleInputNombre1">Nombre:</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="exampleInputNombre1"
-                    placeholder="Nombre Completo"
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="exampleInputTelefono1">Teléfono:</label>
-                  <input
-                    type="tel"
-                    className="form-control"
-                    id="exampleInputTelefono1"
-                    placeholder="123456789"
-                  />
-                </div>
-              </>
-            )}
+            {!!isRegistering && (
+            <>
+              <div className="form-group">
+                <label htmlFor="exampleInputNombre1">Nombre:</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="exampleInputNombre1"
+                  placeholder="Nombre Completo"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="exampleInputTelefono1">Teléfono:</label>
+                <input
+                  type="tel"
+                  className="form-control"
+                  id="exampleInputTelefono1"
+                  placeholder="123456789"
+                />
+              </div>
+            </>
+          )}
 
             <div className="form-group">
               <label htmlFor="exampleInputEmail1">Email:</label>
@@ -72,8 +126,8 @@ const Login = ({ setIsAuthenticated }) => {
             <div className="form-group">
               <label htmlFor="exampleInputPassword1">Contraseña:</label>
               <input
-                value={pass}
-                onChange={(e) => setPass(e.target.value)}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 type="password"
                 className="form-control"
                 id="exampleInputPassword1"
@@ -84,28 +138,28 @@ const Login = ({ setIsAuthenticated }) => {
 
             <div className="d-grid gap-2 p-3 d-sm-flex justify-content-sm-center">
               <button
-                className={action ? "ingreso_btn gray" : "ingreso_btn"}
-                onClick={() => toggleAction(true)}
+                className={isRegistering ? "ingreso_btn" : "ingreso_btn gray"}
                 type="submit"
               >
-                Ingresar
+                {isRegistering ? "Registrar" : "Ingresar"}
               </button>
               <button
-                className={action ? "ingreso_btn" : "ingreso_btn gray"}
-                onClick={() => toggleAction(false)}
-                type="submit"
+                className={isRegistering ? "ingreso_btn gray" : "ingreso_btn"}
+                type="button"
+                onClick={toggleRegister}
               >
-                Crear usuario
+                {isRegistering ? "¿Ya tienes cuenta?" : "Crear usuario"}
               </button>
             </div>
 
-            {!action && (
+            {!isRegistering && (
               <div className="text-center">
                 <a className="small" href="#">
                   ¿Olvidaste tu contraseña?
                 </a>
               </div>
-            )}
+            )
+            }
 
             <div className="text-center p-2">
               <a className="small" href="#">
@@ -119,9 +173,9 @@ const Login = ({ setIsAuthenticated }) => {
         </div>
       </div>
     </div>
-    <Footer/>
-    </>
-  );
+    <Footer />
+  </>
+);
 };
 
 export default Login;
