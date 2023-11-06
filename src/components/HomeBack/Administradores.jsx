@@ -1,12 +1,3 @@
-<<<<<<< HEAD
-import React from 'react'
-
-export const Administradores = () => {
-  return (
-    <div>Administradores</div>
-  )
-}
-=======
 import React, { useState, useEffect, useContext } from "react";
 import Usuario from "./Usuario";
 import NavBarBack from '../HomeBack/NavbarBack';
@@ -66,4 +57,3 @@ const Administradores = () => {
   )
 }
 export default Administradores
->>>>>>> 388462e0eb5e91794bba73dcb9a43777eed204d3

@@ -79,18 +79,7 @@ function Navbar({setIsAuthenticated}) {
             </div>
           </div>
         </nav>
-<<<<<<< HEAD
-        <Routes>
-          { <Route path="/" element={<Home />} /> }
-          {/* <Route path="/reservar" element={<Reserve />} /> */}
-          <Route path="/login" element={<Login />} />
-          {/* <Route path="/registro" element={<Register />} /> */}
-          {/* <Route path="/contacto" element={<Contacto />} /> */}
-        </Routes>
-      </BrowserRouter>
-=======
        
->>>>>>> 388462e0eb5e91794bba73dcb9a43777eed204d3
     </>
   );
 }

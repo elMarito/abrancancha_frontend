@@ -12,15 +12,6 @@
   },
   "dependencies": {
     "bootstrap": "^5.3.2",
-<<<<<<< HEAD
-    "icons": "^1.0.0",
-    "react": "^18.2.0",
-    "react-datepicker": "^4.18.0",
-    "react-dom": "^18.2.0",
-    "react-icons": "^4.11.0",
-    "react-router-dom": "^6.16.0",
-    "sweetalert2": "^11.9.0"
-=======
     "json-server": "^0.17.4",
     "react": "^18.2.0",
     "react-datepicker": "^4.18.0",
@@ -28,7 +19,6 @@
     "react-hook-form": "^7.47.0",
     "react-router-dom": "^6.16.0",
     "react-use": "^17.4.0"
->>>>>>> 388462e0eb5e91794bba73dcb9a43777eed204d3
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

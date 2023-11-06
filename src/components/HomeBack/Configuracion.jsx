@@ -1,12 +1,4 @@
 import React from 'react'
-<<<<<<< HEAD
-
-export const Configuracion = () => {
-  return (
-    <div>Configuracion / Datos del Club</div>
-  )
-}
-=======
 import NavBarBack from '../HomeBack/NavbarBack';
 const Configuracion = () => {
   // "id": 1,
@@ -95,4 +87,3 @@ const Configuracion = () => {
 }
 
 export default Configuracion
->>>>>>> 388462e0eb5e91794bba73dcb9a43777eed204d3

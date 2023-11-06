@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-import React from 'react'
-import './App.css'
-import Navbar from './components/Navbar/Navbar'
-=======
 import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './components/Home/Home';
@@ -18,22 +13,10 @@ import Administradores from './components/HomeBack/Administradores'
 import Configuracion from './components/HomeBack/Configuracion'
 
 
->>>>>>> 388462e0eb5e91794bba73dcb9a43777eed204d3
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   return (
-<<<<<<< HEAD
- <>
- <Navbar></Navbar>
- 
- 
- </>
-  )
-}
-
-export default App
-=======
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -54,4 +37,3 @@ export default App
 }
 
 export default App;
->>>>>>> 388462e0eb5e91794bba73dcb9a43777eed204d3
