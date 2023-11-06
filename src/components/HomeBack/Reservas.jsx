@@ -1,5 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import Reserva from "./Reserva";
+<<<<<<< HEAD
+=======
+import NavBarBack from "./NavbarBack";
+>>>>>>> 45c3c5dabcd8a9c5d54c98a7e6eb6e68295a9d5b
 
 // import { appContext } from '../../context/appContext';
 //-----------------------------------------------------------------------------
@@ -91,6 +95,10 @@ const Reservas = () => {
 
     return (
         <>
+<<<<<<< HEAD
+=======
+        <NavBarBack/>
+>>>>>>> 45c3c5dabcd8a9c5d54c98a7e6eb6e68295a9d5b
             <button type="button" className="edit btn btn-primary" >
                 <i className="fa-regular fa-pen-to-square">Agregar reservas</i>
             </button>

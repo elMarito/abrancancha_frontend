@@ -1,8 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+<<<<<<< HEAD
 import { AppContextProvider } from './context/appContext';
 import { BrowserRouter, RouterProvider, createBrowserRouter } from 'react-router-dom'
 
+=======
+>>>>>>> 45c3c5dabcd8a9c5d54c98a7e6eb6e68295a9d5b
 import App from './App'
 import PrivateRoute from './components/PrivateRoute';
 import Home from './components/Home/Home';
@@ -32,6 +35,7 @@ const route = createBrowserRouter([
 ])
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
+<<<<<<< HEAD
   // <React.StrictMode>
   <AppContextProvider>
     <RouterProvider router={route}>
@@ -42,3 +46,8 @@ root.render(
   </AppContextProvider>
   //   </React.StrictMode>,
 )
+=======
+<App></App>
+
+)
+>>>>>>> 45c3c5dabcd8a9c5d54c98a7e6eb6e68295a9d5b

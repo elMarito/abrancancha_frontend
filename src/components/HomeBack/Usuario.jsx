@@ -1,9 +1,18 @@
 import React from 'react'
+<<<<<<< HEAD
+=======
+import NavBarBack from './NavbarBack';
+>>>>>>> 45c3c5dabcd8a9c5d54c98a7e6eb6e68295a9d5b
 
 const Usuario = ({data}) => {
     const { id, nombre, email, telefono, estado } = data;
     console.log(data);
     return (
+<<<<<<< HEAD
+=======
+        <>
+        <NavBarBack/>
+>>>>>>> 45c3c5dabcd8a9c5d54c98a7e6eb6e68295a9d5b
         <tr>
             <td>{id}</td>
             {/* <td>{idClub}</td> */}
@@ -23,6 +32,10 @@ const Usuario = ({data}) => {
                 </button>
             </td>
         </tr>
+<<<<<<< HEAD
+=======
+        </>
+>>>>>>> 45c3c5dabcd8a9c5d54c98a7e6eb6e68295a9d5b
     );
 }; 
 

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react'
 import { Routes, Route } from 'react-router-dom';
 
@@ -14,11 +15,18 @@ import PrivateRoute from '../PrivateRoute.jsx';
 function HomeB() {
   // const isAuthenticated = false;
 
+=======
+import React from 'react';
+import NavBarBack from '../HomeBack/NavbarBack';
+
+function HomeB() {
+>>>>>>> 45c3c5dabcd8a9c5d54c98a7e6eb6e68295a9d5b
   return (
     <div>
       <header>
         <NavBarBack />
       </header>
+<<<<<<< HEAD
       <main id='body'>
         <Routes>
           {/* <PrivateRoute exact path="cronograma" element={<Cronograma />} /> */}
@@ -45,3 +53,13 @@ function HomeB() {
   )
 }
 export default HomeB
+=======
+      <main id="body">
+        <h1>Nuestras Canchas</h1>
+      </main>
+    </div>
+  );
+}
+
+export default HomeB;
+>>>>>>> 45c3c5dabcd8a9c5d54c98a7e6eb6e68295a9d5b
