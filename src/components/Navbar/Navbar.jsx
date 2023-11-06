@@ -8,11 +8,25 @@ import "react-datepicker/dist/react-datepicker.css";
 import Login from '../Login/Login';
 // import Register from './Register';
 
-function Navbar() {
+function Navbar({setIsAuthenticated}) {
   const [startDate, setStartDate] = useState(new Date());
+  const [userloger, setUserLoger] =useState(null)
+
+  const logeado = () =>{
+    console.log("Usuario Logueado")
+    setUserLoger({
+      id:1,
+      name:"Juan"
+    })
+  }
+
+  const logout = () =>{
+  
+    setUserLoger(null)
+  }
   return (
     <>
-      <BrowserRouter>
+      
         <nav className="navbar navbar-expand-lg  static-top">
           <div className="container ">
             <Link to='/' className="navbar-brand"><img src="src/assets/abc_logo.svg" alt="" width="90" /></Link>
@@ -53,12 +67,19 @@ function Navbar() {
                   </li>
                 </li>
 
-                <Link to="/login" className="nav-link" aria-current="page" href="#"><button className='search_btn'>Buscar Cancha</button></Link>
-                <Link to="/login" className="nav-link" aria-current="page" href="#"><button className='login_btn'> <i className="fa-regular fa-user"></i>Login</button></Link>
+                <Link to="/buscar-canchas" className="nav-link" aria-current="page" href="#"><button className='search_btn'>Buscar Cancha</button></Link>
+                {userloger ?(
+                  <Link to="/" className="nav-link" aria-current="page" href="#"><button onClick={logout} className='login_btn'> <i className="fa-regular fa-user"></i>Logout</button></Link>
+                
+                ):(
+                  <Link to="/login" className="nav-link" aria-current="page" href="#"><button onClick={logeado} className='login_btn'> <i className="fa-regular fa-user"></i>Login</button></Link>
+                )
+              }
               </ul>
             </div>
           </div>
         </nav>
+<<<<<<< HEAD
         <Routes>
           { <Route path="/" element={<Home />} /> }
           {/* <Route path="/reservar" element={<Reserve />} /> */}
@@ -67,6 +88,9 @@ function Navbar() {
           {/* <Route path="/contacto" element={<Contacto />} /> */}
         </Routes>
       </BrowserRouter>
+=======
+       
+>>>>>>> 388462e0eb5e91794bba73dcb9a43777eed204d3
     </>
   );
 }

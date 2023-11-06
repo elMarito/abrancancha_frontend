@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react'
 import Navbar from './components/Navbar.jsx'
 import Canchas from './canchas.jsx'
@@ -28,3 +29,22 @@ export const HomeB = () => {
     </div>
   )
 }
+=======
+import React from 'react';
+import NavBarBack from '../HomeBack/NavbarBack';
+
+function HomeB() {
+  return (
+    <div>
+      <header>
+        <NavBarBack />
+      </header>
+      <main id="body">
+        <h1>Nuestras Canchas</h1>
+      </main>
+    </div>
+  );
+}
+
+export default HomeB;
+>>>>>>> 388462e0eb5e91794bba73dcb9a43777eed204d3

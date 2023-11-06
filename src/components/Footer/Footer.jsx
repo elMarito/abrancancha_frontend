@@ -16,7 +16,7 @@ function Footer() {
       </div>
 
       <div className="center-section">
-        <p>Abran Cancha 2023 | Todos los derechos reservados</p>
+        <p>Abrancancha 2023 | Todos los derechos reservados</p>
       </div>
 
       <div className="right-section">
