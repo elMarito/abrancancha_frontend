@@ -43,7 +43,7 @@ export default App
           <Route path="cronograma" element={<Cronograma />} />
           <Route path="canchas" element={<Canchas />} />
           <Route path="agenda" element={<Agenda />} />
-          <Route path="reserva" element={<Reservas />} />
+          <Route path="reservas" element={<Reservas />} />
           <Route path="clientes" element={<Clientes />} />
           <Route path="administradores" element={<Administradores />} />
           <Route path="configuracion" element={<Configuracion />} />
