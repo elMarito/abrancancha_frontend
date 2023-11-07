@@ -12,22 +12,13 @@
   },
   "dependencies": {
     "bootstrap": "^5.3.2",
-<<<<<<< HEAD
-    "icons": "^1.0.0",
-=======
->>>>>>> 45c3c5dabcd8a9c5d54c98a7e6eb6e68295a9d5b
     "json-server": "^0.17.4",
     "react": "^18.2.0",
     "react-datepicker": "^4.18.0",
     "react-dom": "^18.2.0",
-<<<<<<< HEAD
-    "react-icons": "^4.11.0",
-    "react-router-dom": "^6.16.0"
-=======
     "react-hook-form": "^7.47.0",
     "react-router-dom": "^6.16.0",
     "react-use": "^17.4.0"
->>>>>>> 45c3c5dabcd8a9c5d54c98a7e6eb6e68295a9d5b
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

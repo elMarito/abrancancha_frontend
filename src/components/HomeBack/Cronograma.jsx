@@ -1,16 +1,10 @@
 import React from 'react'
-<<<<<<< HEAD
-=======
 import NavBarBack from '../HomeBack/NavbarBack';
->>>>>>> 45c3c5dabcd8a9c5d54c98a7e6eb6e68295a9d5b
 
 const Cronograma = () => {
     return (
         <>
-<<<<<<< HEAD
-=======
         <NavBarBack/>
->>>>>>> 45c3c5dabcd8a9c5d54c98a7e6eb6e68295a9d5b
             <button type="button" className="edit btn btn-primary" >
                 <i className="fa-regular fa-pen-to-square">Agregar reservas</i>
             </button><button type="button" className="edit btn btn-primary" >

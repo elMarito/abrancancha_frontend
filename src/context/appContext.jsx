@@ -100,7 +100,3 @@ export const setUser = (user) => {
   setCache(prevState => ({ ...prevState, user }));
 };
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 45c3c5dabcd8a9c5d54c98a7e6eb6e68295a9d5b

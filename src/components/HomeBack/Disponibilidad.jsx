@@ -1,16 +1,10 @@
 import React, { useState, useEffect } from "react";
-<<<<<<< HEAD
-
-const Disponibilidad = () => {
-  return (
-=======
 import NavBarBack from "./NavbarBack";
 
 const Disponibilidad = () => {
   return (
     <>
     <NavBarBack/>
->>>>>>> 45c3c5dabcd8a9c5d54c98a7e6eb6e68295a9d5b
     <table className="table table-sm table-hover">
       <thead>
         <tr>
@@ -51,10 +45,7 @@ const Disponibilidad = () => {
         </tr>
       </tbody>
     </table>
-<<<<<<< HEAD
-=======
     </>
->>>>>>> 45c3c5dabcd8a9c5d54c98a7e6eb6e68295a9d5b
   )
 }
 export default Disponibilidad
