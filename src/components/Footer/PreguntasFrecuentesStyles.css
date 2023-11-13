@@ -7,35 +7,52 @@
   color: #1d1d1d;
   font-family: "Inter", sans-serif;
   text-align: center;
-}
-
-.pregunta {
-  margin: 20px 0;
+  min-height: 70vh; 
   display: flex;
   flex-direction: column;
-  align-items: center; /* Añadido para centrar el contenido */
+  justify-content: center;
 }
 
-.pregunta h3 {
-  font-family: "Bebas Neue", sans-serif;
-  font-weight: 900;
-  text-transform: uppercase;
+.accordion-container {
+  max-width: 900px; 
+  margin: 0 auto; 
 }
 
-.pregunta p {
-  margin-top: 10px;
+.accordion-item {
+  margin-bottom: 10px;
 }
 
-/* Estilos para las listas */
-.pregunta ol,
-.pregunta ul {
+.accordion-button {
+  background-color: #1d1d1d;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  text-align: center;
+  width: 100%;
+}
+
+.accordion-button.collapsed {
+  text-align: center;
+}
+
+.accordion-body {
+  background-color: #0f1c0f;
+  color: #ffffff;
+  border: 1px solid #1d1d1d;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+
+.accordion-body ul,
+.accordion-body ol {
   list-style: none;
   padding: 0;
-  text-align: left;
 }
 
 .pregunta li {
-  margin-left: 1.5em;
+  margin-left: 0;
   position: relative;
   text-align: left;
 }

@@ -2,7 +2,7 @@
 import React from 'react';
 import Navbar from '../Navbar/Navbar';
 import Footer from '../Footer/Footer';
-import './ContactoStyles.css'; 
+import './ContactoStyles.css';
 
 function Contacto() {
   return (
@@ -16,15 +16,15 @@ function Contacto() {
         <form>
           <div className="form-group">
             <label htmlFor="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre" required />
+            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre completo" required />
           </div>
           <div className="form-group">
             <label htmlFor="email">Correo electrónico:</label>
-            <input type="email" id="email" name="email" required />
+            <input type="email" id="email" name="email" placeholder="Tu correo electrónico" required />
           </div>
           <div className="form-group">
             <label htmlFor="mensaje">Mensaje:</label>
-            <textarea id="mensaje" name="mensaje" required></textarea>
+            <textarea id="mensaje" name="mensaje" placeholder="Escribe tu mensaje" required></textarea>
           </div>
           <button type="submit">Enviar Mensaje</button>
         </form>
