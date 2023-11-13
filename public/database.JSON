@@ -305,28 +305,31 @@
     },
     {
       "email": "pepebanchi7@hotmail.com",
-      "password": "414141",
+      "password": "123",
+      "nombre": "Agustin",
+      "telefono": "44141",
       "id": 25
     },
     {
       "email": "pepebanchi7@hotmail.com",
-      "password": "414141",
+      "password": "123",
+      "nombre": "Agustin",
+      "telefono": "1414124",
       "id": 26
     },
     {
       "email": "pepebanchi7@hotmail.com",
-      "password": "414141",
+      "password": "111",
+      "nombre": "Agustin",
+      "telefono": "1414124",
       "id": 27
     },
     {
-      "email": "pepebanchi7@hotmail.com",
-      "password": "1345",
+      "email": "nicom@gmail.com",
+      "password": "123",
+      "nombre": "Agustin",
+      "telefono": "1414",
       "id": 28
-    },
-    {
-      "email": "pepebanchi7@hotmail.com",
-      "password": "1345",
-      "id": 29
     }
   ],
   "administradores": [
