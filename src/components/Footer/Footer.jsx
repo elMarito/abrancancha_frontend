@@ -10,7 +10,6 @@ function Footer() {
     <footer className="footer-container">
       <div className="left-section">
         <div className="contact-section">
-          
           <Link to="/contacto">Contacto</Link>
         </div>
         <div className="faq-section">

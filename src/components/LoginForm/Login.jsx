@@ -2,12 +2,17 @@ import React, { useState } from 'react';
 import './LoginStyles.css';
 import Navbar from '../Navbar/Navbar';
 import Footer from '../Footer/Footer';
-
+import { useNavigate } from "react-router-dom";
 const Login = ({ setIsAuthenticated }) => {
+  const [nombre, setNombre] = useState('');
+  const [telefono, setTelefono] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isRegistering, setIsRegistering] = useState(false);
 
+
+
+  const [isRegistering, setIsRegistering] = useState(false);
+  const navigate = useNavigate();
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -27,10 +32,17 @@ const Login = ({ setIsAuthenticated }) => {
           );
           if (user) {
             setIsAuthenticated(true);
+            setNombre(user.nombre); // Actualizar el estado del nombre con el nombre del usuario
+            Swal.fire(
+              'Acceso correcto',
+              `¡Bienvenido, ${user.nombre}!`, // Usar el nombre del usuario en el mensaje
+              'success',
+            );
           } else {
-            Swal.fire('Error', 'No se pudo aceder', 'error');
+            Swal.fire('Error', 'No se pudo acceder', 'error');
           }
         }
+        navigate("/buscar-canchas");
       } catch (error) {
         // Manejar errores de conexión a la API
       }
@@ -40,24 +52,28 @@ const Login = ({ setIsAuthenticated }) => {
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    if (email && password) {
+    if (email , password, nombre, telefono ) {
       try {
         const response = await fetch('http://localhost:3030/usuarios', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ email, password }),
+          body: JSON.stringify({ email, password, nombre, telefono }),
         });
 
         if (response.ok) {
+          
           setIsAuthenticated(true);
           Swal.fire(
             'Registro correcto',
             ' Jugador registrado con éxito',
             'success',
           );
-        } else {
+          
+        }
+        
+        else {
           Swal.fire('Error', 'No se pudo Registrar al jugador', 'error');
         }
       } catch (error) {
@@ -78,7 +94,7 @@ const Login = ({ setIsAuthenticated }) => {
     <div className="container-fluid formcontent">
       <div className="row p-5">
         <div className="col-lg-8 col-md-6 g-4 pb-3 text-center">
-          <h1>Bienvenido {email}</h1>
+          <h1>Bienvenido {nombre}</h1>
           <img src="src/assets/abc_login.svg" alt="" width="300" />
         </div>
         <div className="col-lg-4 col-md-6">
@@ -92,6 +108,7 @@ const Login = ({ setIsAuthenticated }) => {
               <div className="form-group">
                 <label htmlFor="exampleInputNombre1">Nombre:</label>
                 <input
+                onChange={(e) => setNombre(e.target.value)}
                   type="text"
                   className="form-control"
                   id="exampleInputNombre1"
@@ -101,6 +118,7 @@ const Login = ({ setIsAuthenticated }) => {
               <div className="form-group">
                 <label htmlFor="exampleInputTelefono1">Teléfono:</label>
                 <input
+                onChange={(e) => setTelefono(e.target.value)}
                   type="tel"
                   className="form-control"
                   id="exampleInputTelefono1"
@@ -138,6 +156,7 @@ const Login = ({ setIsAuthenticated }) => {
 
             <div className="d-grid gap-2 p-3 d-sm-flex justify-content-sm-center">
               <button
+              onClick={onsubmit}
                 className={isRegistering ? "ingreso_btn" : "ingreso_btn gray"}
                 type="submit"
               >

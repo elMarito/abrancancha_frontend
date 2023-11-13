@@ -16,6 +16,8 @@ body {
   min-height: 100vh;
 }
 
+
+
 .left-section, .center-section, .right-section {
   flex: 1;
 }
@@ -76,4 +78,15 @@ body {
 
 .social-text {
   font-size: 14px;
+}
+/* FooterStyles.css */
+.left-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Alinea los elementos a la izquierda */
+}
+
+.contact-section,
+.faq-section {
+  margin-bottom: 10px; /* Espaciado entre las secciones */
 }

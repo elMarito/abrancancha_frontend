@@ -1,5 +1,7 @@
 import React from 'react';
 import NavBarBack from '../HomeBack/NavbarBack';
+import Banner from '../Banner/Banner';
+import Footer from '../Footer/Footer';
 
 function HomeB() {
   return (
@@ -8,7 +10,8 @@ function HomeB() {
         <NavBarBack />
       </header>
       <main id="body">
-        <h1>Nuestras Canchas</h1>
+        <Banner/>
+        <Footer/>
       </main>
     </div>
   );

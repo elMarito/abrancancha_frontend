@@ -1,120 +1,172 @@
-import React, { useState, useEffect, useContext } from "react";
-import Reserva from "./Reserva";
+import React, { useState, useEffect } from "react";
 import NavBarBack from "./NavbarBack";
 
-// import { appContext } from '../../context/appContext';
-//-----------------------------------------------------------------------------
-const Reservas = () => {
-    const [reservas, setReservas] = useState([]);
-    // let usuarios = new Map();
-    // let canchas = new Map();
+function Reservas() {
+  const baseUrl = "http://localhost:3030/reservas";
 
-    const BASE_URL = "http://localhost:3030/"
-    useEffect(() => {
+  const [users, setUsers] = useState([]);
+  const [editingUser, setEditingUser] = useState(null);
 
-        const fetchBoth = async (setReservas) => {
-            // https://stackoverflow.com/questions/57531665/fetching-data-just-after-another-fetch-is-complete-in-react-hooks
-            // https://stackoverflow.com/questions/73114731/multiple-fetch-in-useeffect-fetch-data-depend-on-another-fetch-data
-            try {
-                const arrayToMap = async (array) => {
-                    const newMap = new Map();
-                    array.forEach(row => { newMap.set(row.id, row) });
-                    return newMap
-                }
+  const fetchUsers = async () => {
+    try {
+      const response = await fetch(baseUrl);
+      if (response.ok) {
+        const data = await response.json();
+        setUsers(data);
+      } else {
+        console.error("Error al recuperar las reservas");
+      }
+    } catch (error) {
+      console.error("Error al recuperar las reservas", error);
+    }
+  };
 
-                const fetchTranformTo = async (baseUrlAndEndPooint, arrayToMap) => {
-                    const res1 = await fetch(baseUrlAndEndPooint);
-                    if (!res1.ok) throw new Error(`${res1.status}. ${res1.statusText}`);
-                    const data = await res1.json();
+  const deleteUser = async (userId) => {
+    if (window.confirm('¿Estás seguro de que quieres eliminar esta Reserva?')) {
+      try {
+        const response = await fetch(`${baseUrl}/${userId}`, {
+          method: 'DELETE',
+        });
+        if (response.ok) {
+          Swal.fire(
+            'reserva eliminada',
+            'Su reserva fue eliminada con éxito',
+            'success',
+          );
+           // Actualizar la tabla después de eliminar
+          fetchUsers();
+        } else {
+          Swal.fire('Error', 'No se pudo eliminar la reserva', 'error');
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
 
-                    return (arrayToMap === undefined) ? data : arrayToMap(data)
-                }
+  const updateUser = async (user) => {
+    try {
+      const response = await fetch(`${baseUrl}/${user.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user),
+      });
+      if (response.ok) {
+        Swal.fire(
+          'Reserva editada',
+          'Su reserva fue editada con éxito',
+          'success',
+        );
+        // Actualizar la tabla después de editar
+        fetchUsers();
+      } else {
+        Swal.fire('Error', 'No se pudo editar su reserva', 'error');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+    setEditingUser(null);
+  };
 
-                const canchasMap = await fetchTranformTo(BASE_URL + "canchas_club", arrayToMap);
-                const usuariosMap = await fetchTranformTo(BASE_URL + "usuarios", arrayToMap);
-                const data3 = await fetchTranformTo(BASE_URL + "reservas");
-                // const res1 = await fetch(BASE_URL + "canchas_club");
-                // if (!res1.ok) throw new Error(`${res1.status}. ${res1.statusText}`);
-                // const data = await res1.json();
-                // const canchasMap = new Map();
-                // data.forEach((cancha) => { canchasMap.set(cancha.id, cancha) });
+  const cancelEdit = () => {
+    setEditingUser(null);
+  };
 
-                // const res2 = await fetch(BASE_URL + "usuarios");
-                // if (!res2.ok) throw new Error(`${res2.status}. ${res2.statusText}`);
-                // const data2 = await res2.json();
-                // const usuariosMap = new Map();
-                // data2.forEach((usuario) => { usuariosMap.set(usuario.id, usuario) });
+  useEffect(() => {
+    fetchUsers();
+  }, []);
 
-                // const res3 = await fetch(BASE_URL + "reservas");
-                // if (!res3.ok) throw new Error(`${res3.status}. ${res3.statusText}`);
-                // const data3 = await res3.json();
-                setReservas(
-                    data3.map(row => ({
-                        id: row.id, fecha: row.fecha, estado: row.estado,
-                        usuario: usuariosMap.get(row.idUsuario),
-                        cancha: canchasMap.get(row.idCancha)
-                    }))
-                );
-                // console.log(reservas);
-            } catch (error) {
-                console.log(error)/* alert("ojo") */ /* err = setError(err) */
-            }
-        };
-
-        fetchBoth(setReservas);
-        // usuarios = getUsuarios(BASE_URL);
-        // canchas = getCanchas(BASE_URL);
-
-        // fetch(BASE_URL + "reservas")
-        //     .then(res => {
-        //         if (res.ok) return res.json();
-        //         throw new Error(`${res.status}. ${res.statusText}`);
-        //     })
-        //     .then(data => {
-        //         setReservas(data);
-        //         // setReservas((prevState) => ({
-        //         //     ...prevState,
-        //         //     usuario: usuarios.get(data.idUsuario),
-        //         //     cancha: canchas.get(data.idCancha),
-        //         // }));
-
-        //         // "id": 1,
-        //         // "idUsuario": 1,
-        //         // "idCancha": 101,
-        //         // "fecha": "2023-10-21T10:00:00Z",
-        //         // "estado": "confirmada"
-        //         // console.log(data);
-        //     })
-        //     .catch(error => console.log(error)/* alert("ojo") */ /* err = setError(err) */)
-    }, [])
-
-    if (reservas.lenght == 0) return (<></>);
-
-    return (
-        <>
-        <NavBarBack/>
-            <button type="button" className="edit btn btn-primary" >
-                <i className="fa-regular fa-pen-to-square">Agregar reservas</i>
-            </button>
-            <table className="table table-sm table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">N°</th>
-                        {/* <th scope="col">id</th> */}
-                        <th scope="col">Usuario </th>
-                        <th scope="col">Cancha </th>
-                        <th scope="col">Fecha</th>
-                        <th scope="col">Estado</th>
-                        <th scope="col">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody className='table-striped table-group-divider'>
-                    {reservas.map(reserva => (
-                        <Reserva key={reserva.id} data={reserva} />
-                    ))}
-                </tbody>
-            </table>
-        </>
-    )
+  return (
+    <div>
+      <NavBarBack/>
+      <table id="tabla" className="table table-dark table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Cancha</th>
+            <th>Fecha</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {users.map((user) => (
+            <tr key={user.id}>
+              <td>{user.id}</td>
+              <td>
+                {editingUser && editingUser.id === user.id ? (
+                  <select className="custom-select" value={editingUser.idCancha} onChange={(e) => setEditingUser({ ...editingUser, idCancha: e.target.value })}>
+                    <option disabled selected value>Cancha</option>
+                    <option value="Cancha 1">Cancha 1</option>
+                    <option value="Cancha 2">Cancha 2</option>
+                    <option value="Cancha 3">Cancha 3</option>
+                  </select>
+                ) : (
+                  user.idCancha
+                )}
+              </td>
+              <td>
+                {editingUser && editingUser.id === user.id ? (
+                  <input
+                    type="date"
+                    required
+                    value={editingUser.fecha}
+                    onChange={(e) =>
+                      setEditingUser({
+                        ...editingUser,
+                        fecha: e.target.value,
+                      })
+                    }
+                  />
+                ) : (
+                  user.fecha
+                )}
+              </td>
+              <td>
+                {editingUser && editingUser.id === user.id ? (
+                  <select className="custom-select" value={editingUser.estado} onChange={(e) => setEditingUser({ ...editingUser, estado: e.target.value })}>
+                    <option disabled selected value>Estado</option>
+                    <option value="Pendiente">Pendiente</option>
+                    <option value="Confirmado">Confirmado</option>
+                    <option value="Falta pago">Falta pago</option>
+                  </select>
+                ) : (
+                  user.estado
+                )}
+              </td>
+              <td>
+                {editingUser && editingUser.id === user.id ? (
+                  <>
+                    <button
+                      className="btn btn-success"
+                      onClick={() => updateUser(editingUser)}
+                    >
+                      Guardar
+                    </button>
+                    <button className="btn btn-secondary" onClick={cancelEdit}>
+                      Cancelar
+                    </button>
+                  </>
+                ) : (
+                  <button
+                    className="btn btn-light"
+                    onClick={() => setEditingUser(user)}
+                  >
+                    <i className="fa-regular fa-pen-to-square"></i>
+                  </button>
+                )}
+                <button className="btn btn-light" onClick={() => deleteUser(user.id)}>
+                <i className="fa-regular fa-trash-can"></i>
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
 }
-export default Reservas
+
+export default Reservas;
