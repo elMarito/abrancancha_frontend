@@ -1,14 +1,18 @@
 import { useState, useEffect } from "react";
-const BASE_URL = "http://localhost:3030/"
+// const BASE_END_POINT = '/players';
+const CONTENT_TYPE_APPLICATION_JSON = { 'Content-Type': 'application/json' };
+const BASE_URL = "http://localhost:3030/";
+// const BASE_URL = "http://localhost:3000/"; // api funcionando
 export const ENDPOINTS = {
     clubes: "clubes",
     tipos_cancha: "tipos_cancha",
-    canchas_club: "canchas_club",
+    canchas_club: "canchas",
     estados_usuario: "estados_usuario",
     usuarios: "usuarios",
     administradores: "administradores",
-    disponibilidad: "disponibilidad",
-    reservas: "reservas"};
+    agendas: "agendas",
+    reservas: "reservas"
+};
 
 export function useFetch(url) {
     // Basic
@@ -84,4 +88,42 @@ export function useFetch(url) {
     //   };
 
     //   return { data, loading, error, handleCancelRequest };
+}
+
+export const arrayToMap = async (array) => {
+    const newMap = new Map();
+    array.forEach(row => { newMap.set(row.id, row) });
+    return newMap
+}
+
+export const fetchTranformTo = async (EndPoint, arrayToMap) => {
+    // const BASE_URL = "http://localhost:3030/"
+    const res1 = await fetch(BASE_URL + EndPoint);
+    if (!res1.ok) throw new Error(`${res1.status}. ${res1.statusText}`);
+    const data = await res1.json();
+
+    return (arrayToMap === undefined) ? data : arrayToMap(data)
+}
+
+export const fetchCreate = async (endPoint, newData) => {
+    const response = await fetch(`${BASE_URL}/${endPoint}`, {
+        method: 'POST',
+        headers: CONTENT_TYPE_APPLICATION_JSON,
+        body: JSON.stringify(newData),
+    });
+    return response;
+}
+export const fetchUpdate = async (endPoint, newData, idData) => {
+    const response = await fetch(`${BASE_URL}/${endPoint}/${idData}`, {
+        method: 'POST',
+        headers: CONTENT_TYPE_APPLICATION_JSON,
+        body: JSON.stringify(newData),
+    });
+    return response;
+}
+export const fetchDelete = async (endPoint, idData) => {
+    const response = await fetch(`${BASE_URL}/${endPoint}/${idData}`, {
+        method: 'DELETE',
+    });
+    return response;
 }

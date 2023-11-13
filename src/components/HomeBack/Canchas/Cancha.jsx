@@ -13,7 +13,7 @@ const Cancha = ({data}) => {
             <td>{numero}</td>
             <td>{nombre}</td>
             <td>{tipo}</td>
-            <td>$ {tarifa}</td>
+            <td>$&#32;{tarifa}</td>
             <td>{observaciones}</td>
             <td>{"★".repeat(rating) + "☆".repeat(5-rating)}</td>
             {/* <td>{rating > 2.5 ? "★" : "☆"}</td> */}
