@@ -1,12 +1,3 @@
-<<<<<<< HEAD
-import React from 'react'
-
-export const Disponibilidad = () => {
-  return (
-    <div>Disponibilidad</div>
-  )
-}
-=======
 import React, { useState, useEffect } from "react";
 import NavBarBack from "./NavbarBack";
 
@@ -58,4 +49,3 @@ const Disponibilidad = () => {
   )
 }
 export default Disponibilidad
->>>>>>> 388462e0eb5e91794bba73dcb9a43777eed204d3

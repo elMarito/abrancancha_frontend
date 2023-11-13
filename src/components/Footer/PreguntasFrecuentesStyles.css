@@ -1,0 +1,49 @@
+/* PreguntasFrecuentesStyles.css */
+
+.preguntas-frecuentes-container {
+  background-color: #77da7e;
+  padding: 20px;
+  border-radius: 5px;
+  color: #1d1d1d;
+  font-family: "Inter", sans-serif;
+  text-align: center;
+}
+
+.pregunta {
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Añadido para centrar el contenido */
+}
+
+.pregunta h3 {
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.pregunta p {
+  margin-top: 10px;
+}
+
+/* Estilos para las listas */
+.pregunta ol,
+.pregunta ul {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+}
+
+.pregunta li {
+  margin-left: 1.5em;
+  position: relative;
+  text-align: left;
+}
+
+.pregunta li::before {
+  content: "\2022";
+  color: #1d1d1d;
+  font-weight: bold;
+  position: absolute;
+  left: -1.5em;
+}
