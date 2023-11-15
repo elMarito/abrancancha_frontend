@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import Cancha from "./Cancha";
 import { appContext } from "../../../context/appContext";
 const BASE_URL = "http://localhost:3030/"
+import { ENDPOINTS, arrayToMap, fetchTranformTo, fetchCreate } from '../../../services/useFetch';
 
 // import { appContext } from '../../context/appContext';
 //-----------------------------------------------------------------------------
@@ -16,7 +17,7 @@ const Canchas = () => {
 
   useEffect(() => {
     // console.log("effect");
-    fetch(BASE_URL + "canchas_club")
+    fetch(BASE_URL + ENDPOINTS.canchas)
       .then(res => {
         if (res.ok) return res.json();
         throw new Error(`${res.status}. ${res.statusText}`);

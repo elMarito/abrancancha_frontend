@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 // const BASE_END_POINT = '/players';
 const CONTENT_TYPE_APPLICATION_JSON = { 'Content-Type': 'application/json' };
-const BASE_URL = "http://localhost:3030/";
-// const BASE_URL = "http://localhost:3000/"; // api funcionando
+const BASE_URL = "http://localhost:3030";
+// const BASE_URL = "http://localhost:3000"; // api funcionando
 export const ENDPOINTS = {
     clubes: "clubes",
     tipos_cancha: "tipos_cancha",
-    canchas_club: "canchas",
+    canchas: "canchas",
     estados_usuario: "estados_usuario",
     usuarios: "usuarios",
     administradores: "administradores",
@@ -96,9 +96,9 @@ export const arrayToMap = async (array) => {
     return newMap
 }
 
-export const fetchTranformTo = async (EndPoint, arrayToMap) => {
+export const fetchTranformTo = async (endPoint, arrayToMap) => {
     // const BASE_URL = "http://localhost:3030/"
-    const res1 = await fetch(BASE_URL + EndPoint);
+    const res1 = await fetch(`${BASE_URL}/${endPoint}`);
     if (!res1.ok) throw new Error(`${res1.status}. ${res1.statusText}`);
     const data = await res1.json();
 
@@ -106,6 +106,7 @@ export const fetchTranformTo = async (EndPoint, arrayToMap) => {
 }
 
 export const fetchCreate = async (endPoint, newData) => {
+    // console.log(`${BASE_URL}/${endPoint}`,"<--------");
     const response = await fetch(`${BASE_URL}/${endPoint}`, {
         method: 'POST',
         headers: CONTENT_TYPE_APPLICATION_JSON,

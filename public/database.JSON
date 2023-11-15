@@ -321,17 +321,10 @@
   "cronograma": [],
   "reservas": [
     {
-      "id": 1,
-      "idUsuario": 1,
-      "idCancha": 1,
-      "fecha": "2023-10-21T10:00:00Z",
-      "estado": "confirmada"
-    },
-    {
       "id": 2,
       "idUsuario": 2,
       "idCancha": 1,
-      "fecha": "2023-10-21T14:00:00Z",
+      "fecha": "2023-10-21T04:00:00Z",
       "estado": "pendiente"
     },
     {
@@ -366,7 +359,7 @@
       "id": 7,
       "idUsuario": 7,
       "idCancha": 2,
-      "fecha": "2023-10-21T22:00:00Z",
+      "fecha": "2023-10-21T02:00:00Z",
       "estado": "confirmada"
     },
     {
@@ -389,6 +382,13 @@
       "idCancha": 2,
       "fecha": "2023-10-21T19:00:00Z",
       "estado": "pendiente"
+    },
+    {
+      "idUsuario": 1,
+      "idCancha": 2,
+      "fecha": "2023-10-21T1:00:00Z",
+      "estado": "confirmada",
+      "id": 14
     }
   ],
   "agendas": [

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import Reserva from "./Reserva";
 import NavBarBack from "./NavbarBack";
+import { ENDPOINTS, arrayToMap, fetchTranformTo, fetchCreate } from '../../services/useFetch';
 
 // import { appContext } from '../../context/appContext';
 //-----------------------------------------------------------------------------
@@ -30,10 +31,10 @@ const Reservas = () => {
                     return (arrayToMap === undefined) ? data : arrayToMap(data)
                 }
 
-                const canchasMap = await fetchTranformTo(BASE_URL + "canchas_club", arrayToMap);
+                const canchasMap = await fetchTranformTo(BASE_URL + ENDPOINTS.canchas, arrayToMap);
                 const usuariosMap = await fetchTranformTo(BASE_URL + "usuarios", arrayToMap);
                 const data3 = await fetchTranformTo(BASE_URL + "reservas");
-                // const res1 = await fetch(BASE_URL + "canchas_club");
+                // const res1 = await fetch(BASE_URL + ENDPOINTS.canchas);
                 // if (!res1.ok) throw new Error(`${res1.status}. ${res1.statusText}`);
                 // const data = await res1.json();
                 // const canchasMap = new Map();

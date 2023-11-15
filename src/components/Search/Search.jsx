@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { ENDPOINTS, arrayToMap, fetchTranformTo, fetchCreate } from '../../services/useFetch';
+import { ENDPOINTS, arrayToMap, fetchTranformTo, fetchCreate, fetchDelete } from '../../services/useFetch';
 import CanchaConTurnos from './CanchaConTurnos';
 
 // const Search = ({tipoCanchaElegido, fechaElegida, horaElegida}) => {
@@ -7,7 +7,9 @@ const Search = () => {
     const [tipoCanchaElegido, setTipoCancha] = useState(1);
     const [fechaElegida, setFecha] = useState("2023-10-21T10:00:00Z");
     const [horaElegida, setHora] = useState("10:00");
+    const loggedUserId = 1;
 
+    const [refreshReservas, setRefreshReservas] = useState(false);
     const [reservas, setReservas] = useState([]);
     const [canchas, setCanchas] = useState([]);
 
@@ -18,63 +20,205 @@ const Search = () => {
 
     //-------------------------------------------------------------------------
     // necesito reservas, canchas     
-    // useEffect(() => {
-    //     try {
-    //         // const canchasMap = await fetchTranformTo( "canchas_club", arrayToMap);
-    //         const allCanchas = fetchTranformTo("canchas_club");
-    //         // falta filtrar las canchas del club x
-    //         const canchasFiltradas = [];
-    //         if (tipoCanchaElegido)
-    //             canchasFiltradas = allCanchas.filter(cancha => cancha.idTipo === tipoCanchaElegido);
-    //         else
-    //             canchasFiltradas = allCanchas;
-    //         setCanchas(allCanchas);
-    //     } catch (error) {
-    //         console.log(error)/* alert("ojo") */ /* err = setError(err) */
-    //     }
-    // }, [tipoCanchaElegido])
-    //-------------------------------------------------------------------------
+    const fetchCanchas = async () => {
+        try {
+            // const canchasMap = await fetchTranformTo( ENDPOINTS.canchas, arrayToMap);
+            const allCanchas = await fetchTranformTo(ENDPOINTS.canchas);
+            // falta filtrar las canchas del club x
+            if (tipoCanchaElegido)
+                setCanchas(allCanchas.filter(cancha => cancha.idTipo === tipoCanchaElegido));
+            else
+                setCanchas(allCanchas);
+        } catch (error) {
+            console.log(error)/* alert("ojo") */ /* err = setError(err) */
+        }
+    }
+    const fetchReservas = async () => {
+        try {
+            const allReservas = await fetchTranformTo("reservas");
+            // aplicar filtros
+            // dataReservas.map(/**filtrar x fecha x tipo de cancha */)
+
+            // filtrar todas x fecha o filtrar despues cada vez q cambio de cancha
+            const reservasFiltradas = allReservas.filter(reserva => reserva.fecha === fechaElegida);
+            setReservas(allReservas);
+        } catch (error) {
+            console.log(error)/* alert("ojo") */ /* err = setError(err) */
+        }
+    };
     useEffect(() => {
-        const fetchBoth = async () => {
-            try {
-                // const canchasMap = await fetchTranformTo( "canchas_club", arrayToMap);
-                const allCanchas = await fetchTranformTo("canchas_club");
-                // console.log("allCanchas",allCanchas);
-                // falta filtrar las canchas del club x
-                if (tipoCanchaElegido)
-                    setCanchas(allCanchas.filter(cancha => cancha.idTipo === tipoCanchaElegido));
-                else
-                    setCanchas(allCanchas);
-                // console.log("canchas", canchas);
-                //--------------
-                // const usuariosMap = await fetchTranformTo("usuarios", arrayToMap);
-                // setCanchas(usuariosMap);
-                //--------------
-                const allReservas = await fetchTranformTo("reservas");
-                // aplicar filtros
-                // dataReservas.map(/**filtrar x fecha x tipo de cancha */)
+        fetchCanchas();
+    }, [tipoCanchaElegido])
+    //-------------------------------------------------------------------------
 
-                // filtrar todas x fecha o filtrar despues cada vez q cambio de cancha
-                const reservasFiltradas = allReservas.filter(reserva => reserva.fecha === fechaElegida);
-                setReservas(allReservas);
-                // console.log("reservas", reservas);
-            } catch (error) {
-                console.log(error)/* alert("ojo") */ /* err = setError(err) */
-            }
-        };
-
-        fetchBoth();
-        // fetchBoth(setReservas, setCanchas);
+    useEffect(() => {
+        fetchReservas();
     }, [])
-    // }, [fechaElegida, tipoCanchaElegido])
+    // }, [refreshReservas, fechaElegida])
 
-    const reservasByCanchaAndDate = (reservas, idCancha/* , fecha */) => {
+    const reservasByCancha = (reservas, idCancha/* , fecha */) => {
         const data = reservas.filter(reserva => {
             return reserva.idCancha === idCancha //&& reserva.fecha === fecha;
         });
         //**tambien se podria filtrar reservas canceladas */
         return (data)
-        return arrayToMap(data)
+        // return arrayToMap(data)
+    }
+    //-----------------------------------------------------------------------------
+    const handleAction = (event) => {
+        const btn = event.target.closest('button');
+        if (btn === null) return
+        // console.log(btn.getAttribute('data-cancha-id'));
+        // console.log(btn.getAttribute('data-fecha'));
+
+        // if (btn.classList.contains('view')) handleView(event)
+        // else if (btn.classList.contains('edit')) handleEdit(event)
+        // else if (btn.classList.contains('botonBorrar')) {
+        if (btn.classList.contains('view')) {
+            const usuarioId = Number(btn.getAttribute('data-usuario-id'));
+// console.log(loggedUserId,"usuarioId",usuarioId);
+            if (usuarioId === loggedUserId) {
+                Swal.fire({
+                    title: 'Turno Reservado por ti',
+                    html: `Tienes una reserva en la cancha: <b><u> ${btn.getAttribute('data-cancha-nombre')} </u></b> <br>
+                        el dia <b><u> viernes ## de agosto </u></b> <br>
+                        a las <b><u> ${btn.getAttribute('data-hora')} horas</u></b> <br><br>
+                        ¿Deseas cancelarla ?`,
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonText: `<i class="fa fa-thumbs-down"></i> Si, cancelar la reserva!`,
+                    confirmButtonAriaLabel: "Si, cancelar la reserva!",
+                    cancelButtonText: `<i class="fa fa-thumbs-up"></i> No, mantenarla`,
+                    cancelButtonAriaLabel: "No, mantenarla"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // aca tendria que buscar la reserva por usuario, fecha y hora? y despues borrarla
+                        eliminarReserva(Number(btn.getAttribute('data-reserva-id')))
+                    }
+                });
+            }
+            else
+                return
+            // Swal.fire({
+            //     title: 'Horario no disponible',
+            //     text: "Esta accion no se puede deshacer!",
+            //     icon: 'warning',
+            //     showCancelButton: true,
+            //   })
+        }
+        else if (btn.classList.contains('edit')) {
+            // // const playerId = event.target.getAttribute('data-player-id');
+            // const playerId = btn.getAttribute('data-player-id');
+            // handleDelete(playerId)
+            Swal.fire({
+                title: 'Reservar de Turno',
+                html: `Desea reservar la cancha: <b><u> ${btn.getAttribute('data-cancha-nombre')} </u></b> <br>
+                    el dia <b><u> viernes ## de agosto </u></b> <br>
+                    a las <b><u> ${btn.getAttribute('data-hora')} horas</u></b> ?`,
+                icon: 'question',
+                showCancelButton: true,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    agregarReserva({
+                        "idUsuario": 1,
+                        "idCancha": Number(btn.getAttribute('data-cancha-id')),
+                        "fecha": `2023-10-21T${btn.getAttribute('data-hora')}:00Z`,
+                        "estado": "confirmada"
+                    })
+                    // Swal.fire({
+                    //     title: "Deleted!",
+                    //     text: "Your file has been deleted.",
+                    //     icon: "success"
+                    // });
+                    // } else if (
+                    //     /* Read more about handling dismissals below */
+                    //     result.dismiss === Swal.DismissReason.cancel
+                    // ) {
+                    // Swal.fire({
+                    //     title: "Cancelled",
+                    //     text: "Your imaginary file is safe :)",
+                    //     icon: "error"
+                    // });
+                }
+            });
+
+        }
+    };
+    //-----------------------------------------------------------------------------
+    // FETCHs
+    async function agregarReserva(newReserva) {
+        try {
+            // console.log("newReserva", newReserva);
+            const response = await fetchCreate(ENDPOINTS.reservas, newReserva);
+            if (response.ok) {
+                // actualizar pantalla
+                // setRefreshReservas(!refreshReservas);
+                fetchReservas();
+                // Swal.fire(
+                //     'Reserva Creada!',
+                //     'La reserva fue realizada con éxito',
+                //     'success',
+                // );
+                Swal.fire({
+                    icon: "success",
+                    title: "Reserva Creada!",
+                    text: 'La reserva fue realizada con éxito',
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'No se pudo realizar la reserva',
+                });
+            }
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'No se pudo realizar la reserva. Error: ' + error,
+            });
+            console.error(error);
+        }
+    }
+    //-----------------------------------------------------------------------------
+    // FETCHs
+    async function eliminarReserva(idReserva) {
+        try {
+            // console.log("newReserva", newReserva);
+            const response = await fetchDelete(ENDPOINTS.reservas, idReserva);
+            if (response.ok) {
+                // actualizar pantalla
+                // setRefreshReservas(!refreshReservas);
+                fetchReservas();
+                // Swal.fire(
+                //     'Reserva Cancelada!',
+                //     'La reserva fue cancelada con éxito',
+                //     'success',
+                // );
+                Swal.fire({
+                    icon: "success",
+                    title: "Reserva Cancelada!",
+                    text: 'La reserva fue cancelada con éxito',
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'No se pudo cancelar la reserva',
+                });
+            }
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'No se pudo cancelar la reserva. Error: ' + error,
+            });
+            console.error(error);
+        }
     }
 
     if (canchas.lenght == 0) return (<></>);
@@ -82,18 +226,14 @@ const Search = () => {
         <>
             {/* <NavBarBack/> */}
 
-            {/* <button type="button" className="edit btn btn-primary" >
-                <i className="fa-regular fa-pen-to-square">Agregar reservas</i>
-            </button><button type="button" className="edit btn btn-primary" >
-                <i className="fa-regular fa-pen-to-square">Elegir dia!</i>
-            </button> */}
             <table className="table table-sm table-hover">
                 <thead><tr>
                     <th className='bg-light'>Referencias:</th>
-                    <th className='bg-danger'>Ocupada</th>
-                    <th className='bg-warning'>Libre</th>
-                    <th className='bg-success'>Disponible</th>
-                    <th className='bg-primary'>Reservada</th>
+                    <th className='bg-warning'>Mi Reserva</th>
+                    {/* <th className='bg-info'>Ocupada</th> */}
+                    {/* <th className='bg-primary'>Libre</th>  bg-primary  bg-dark*/}
+                    <th className='bg-primary'>Disponible</th>
+                    <th className='bg-danger'>Reservada</th>
                     <th className='bg-secondary'>No habilitada</th>
                 </tr></thead>
             </table>
@@ -126,7 +266,7 @@ const Search = () => {
                         canchas.map(cancha =>
                             <CanchaConTurnos key={cancha.id}
                                 cancha={cancha}
-                                reservas={reservasByCanchaAndDate(reservas, cancha.id/* , fechaFiltrar */)} />
+                                reservas={reservasByCancha(reservas, cancha.id/* , fechaFiltrar */)} />
                             /* reservas={reservas.filter((reserva) => {
                                 return reserva.idCancha === cancha.id && reserva.fecha === fechaFiltrar;
                             })} */
@@ -140,86 +280,3 @@ const Search = () => {
 
 export default Search
 
-//-----------------------------------------------------------------------------
-const handleAction = (event) => {
-    const btn = event.target.closest('button');
-    if (btn === null) return
-    // console.log(btn.getAttribute('data-cancha-id'));
-    // console.log(btn.getAttribute('data-fecha'));
-
-    // if (btn.classList.contains('view')) handleView(event)
-    // else if (btn.classList.contains('edit')) handleEdit(event)
-    // else if (btn.classList.contains('botonBorrar')) {
-    if (btn.classList.contains('view')) {
-        return
-        // Swal.fire({
-        //     title: 'Horario no disponible',
-        //     text: "Esta accion no se puede deshacer!",
-        //     icon: 'warning',
-        //     showCancelButton: true,
-        //   })
-    }
-    else if (btn.classList.contains('edit')) {
-        // // const playerId = event.target.getAttribute('data-player-id');
-        // const playerId = btn.getAttribute('data-player-id');
-        // handleDelete(playerId)
-        Swal.fire({
-            title: 'Reservar de Turno',
-            html: `Desea reservar la cancha: <b><u> ${btn.getAttribute('data-cancha')} </u></b> <br>
-                    el dia <b><u> viernes ## de agosto </u></b> <br>
-                    a las <b><u> ${btn.getAttribute('data-hora')} horas</u></b> ?`,
-            icon: 'question',
-            showCancelButton: true,
-        }).then((result) => {
-            if (result.isConfirmed) {
-                agregarReserva({
-                    "id": 0,
-                    "idUsuario": 1,
-                    "idCancha": btn.getAttribute('data-cancha'),
-                    "fecha": "2023-10-21T10:00:00Z",
-                    "estado": "confirmada"
-                })
-                swalWithBootstrapButtons.fire({
-                    title: "Deleted!",
-                    text: "Your file has been deleted.",
-                    icon: "success"
-                });
-            } else if (
-                /* Read more about handling dismissals below */
-                result.dismiss === Swal.DismissReason.cancel
-            ) {
-                swalWithBootstrapButtons.fire({
-                    title: "Cancelled",
-                    text: "Your imaginary file is safe :)",
-                    icon: "error"
-                });
-            }
-        });
-
-    }
-};
-//-----------------------------------------------------------------------------
-
-//-----------------------------------------------------------------------------
-// FETCHs
-async function agregarReserva(newReserva) {
-    try {
-        const response = await fetchCreate(ENDPOINTS.reservas, newReserva);
-        if (response.ok) {
-            // actualizar pantalla
-            Swal.fire(
-                'Reserva Creada!',
-                'La reserva fue realizada con éxito',
-                'success',
-            );
-        } else {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'No se pudo realizar la reserva',
-            });
-        }
-    } catch (error) {
-        console.error(error);
-    }
-}
