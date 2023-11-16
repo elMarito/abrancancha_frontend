@@ -110,7 +110,7 @@ function Reservas() {
               <td>
                 {editingUser && editingUser.id === user.id ? (
                   <input
-                    type="date"
+                  type="datetime-local"
                     required
                     value={editingUser.fecha}
                     onChange={(e) =>

@@ -116,6 +116,7 @@ function Usuario() {
                 {editingUser && editingUser.id === user.id ? (
                   <input
                     type="email"
+                    pattern="[ /^(([^<>()[\]\.,;:\s@\" size="30"
                     required
                     value={editingUser.email}
                     onChange={(e) =>
@@ -133,6 +134,7 @@ function Usuario() {
                 {editingUser && editingUser.id === user.id ? (
                   <input
                     type="tel"
+                    pattern="[0-9]{10}"
                     required
                     value={editingUser.telefono}
                     onChange={(e) =>

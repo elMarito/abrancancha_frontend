@@ -120,6 +120,7 @@ const Login = ({ setIsAuthenticated }) => {
                 <input
                 onChange={(e) => setTelefono(e.target.value)}
                   type="tel"
+                  pattern="[0-9]{10}"
                   className="form-control"
                   id="exampleInputTelefono1"
                   placeholder="123456789"
@@ -138,6 +139,7 @@ const Login = ({ setIsAuthenticated }) => {
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
                 placeholder="tu_email@ejemplo.com"
+                pattern="[ /^(([^<>()[\]\.,;:\s@\" size="30"
                 required
               />
             </div>
@@ -150,6 +152,9 @@ const Login = ({ setIsAuthenticated }) => {
                 className="form-control"
                 id="exampleInputPassword1"
                 placeholder="xxxxxx"
+                
+                minLength={8}
+                
                 required
               />
             </div>
