@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { createContext, useState, useEffect, useContext } from "react";
 import DbAdapter, { getAllData2 } from "../services/dbAdapter";
 // import ErrorMsg from "../components/ErrorMsg";
@@ -10,17 +11,7 @@ export const appContext = createContext({});
 //   tiposCancha: new Map()});
 
 export const AppContextProvider = ({ children }) => {
-  // const [products, setProducts] = useState([]);
-  // const [error, setError] = useState(null);
-
-
-  //       {error && <li>Error: {error}</li>}
-  //         {loading && <li>Loading...</li>}
-  //         {data?.map((item) => (
-  //           <li key={item.id}>{item.title}</li>
-  //         ))}
-  // const [cache, setCache] = useState({
-  //   dbAdapter: useFetch(BASE_URL)
+ 
   const BASE_URL = "http://localhost:3030/"
   const [cache, setCache] = useState({
     dbAdapter: new DbAdapter(BASE_URL),

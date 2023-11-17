@@ -3,6 +3,7 @@ import './NavbarStyles.css'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import { useState } from "react";
 import DatePicker from "react-datepicker";
+import { useNavigate } from "react-router-dom";
 import Home from '../Home/Home';
 import "react-datepicker/dist/react-datepicker.css";
 // import Login from '../LoginForm/Login';
@@ -10,20 +11,20 @@ import "react-datepicker/dist/react-datepicker.css";
 
 function Navbar({setIsAuthenticated}) {
   const [startDate, setStartDate] = useState(new Date());
-  const [userloger, setUserLoger] =useState(null)
-
+  const [userloger, setUserLoger] =useState("Login")
+  const navigate = useNavigate();
   const logeado = () =>{
-    console.log("Usuario Logueado")
-    setUserLoger({
-      id:1,
-      name:"Juan"
-    })
+    if(userloger == "Login" ) {
+      setUserLoger("Logout");
+      
+  } else {
+    setUserLoger("Login");
+    navigate("/");
+    window.location.reload();
+  }
   }
 
-  const logout = () =>{
-  
-    setUserLoger(null)
-  }
+
   return (
     <>
       
@@ -68,13 +69,11 @@ function Navbar({setIsAuthenticated}) {
               </li>
 
                 <Link to="/buscar-canchas" className="nav-link" aria-current="page" href="#"><button className='search_btn'>Buscar Cancha</button></Link>
-                {userloger ?(
-                  <Link to="/" className="nav-link" aria-current="page" href="#"><button onClick={logout} className='login_btn'> <i className="fa-regular fa-user"></i>Logout</button></Link>
                 
-                ):(
-                  <Link to="/login" className="nav-link" aria-current="page" href="#"><button onClick={logeado} className='login_btn'> <i className="fa-regular fa-user"></i>Login</button></Link>
-                )
-              }
+                  
+                
+                  <Link to="/login" className="nav-link" aria-current="page" href="#"><button onClick={logeado} className='login_btn'> <i className="fa-regular fa-user"></i>{userloger}</button></Link>
+             
               </ul>
             </div>
           </div>

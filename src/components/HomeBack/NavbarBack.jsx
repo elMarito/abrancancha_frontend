@@ -1,38 +1,45 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 function NavBarBack() {
+
+  const Outsesion=()=>{
+    window.location.reload();
+  }
   return (
     <>
-      <nav className="navbar navbar-expand-lg static-top">
+      <nav className="navbar navbar-expand-lg  static-top">
         <div className="container">
-          <ul className="navbar-nav">
-          <Link to='/' className="navbar-brand"><img src="src/assets/abc_logo.svg" alt="" width="90" /></Link>
-            <Link to="/cronograma" className="nav-link" aria-current="page">
-              <button className="btn btn-sm btn-outline-secondary">Cronograma</button>
-            </Link>
-            <Link to="/canchas" className="nav-link" aria-current="page">
-              <button className="btn btn-outline-success me-2">Canchas</button>
-            </Link>
-            <Link to="/agenda" className="nav-link" aria-current="page">
-              <button className="btn btn-outline-success me-2">Disponibilidad/Agenda</button>
-            </Link>
-            <Link to="/reservas" className="nav-link" aria-current="page">
-              <button className="btn btn-outline-success me-2">Reservas</button>
-            </Link>
-            <Link to="/Clientes" className="nav-link" aria-current="page">
-              <button className="btn btn-outline-success me-2">Clientes</button>
-            </Link>
-            <Link to="/Administradores" className="nav-link" aria-current="page">
-              <button className="btn btn-outline-success me-2">Administradores</button>
-            </Link>
-            <Link to="/configuracion" className="nav-link" aria-current="page">
-              <button className="btn btn-sm btn-outline-secondary">Configuración</button>
-            </Link>
-            <Link to="/" className="nav-link" aria-current="page" href="#">
-            <button className="btn btn-sm btn-outline-secondary">Cerrar sesión</button>
-            </Link>
+         
+          <NavLink to='/' className="navbar-brand"><img src="src/assets/abc_logo.svg" alt="" width="90" /></NavLink>
+          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span className="navbar-toggler-icon"></span>
+            </button>
+            <div className="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+            <ul className="navbar-nav">
+            
+            <NavLink to="/cronograma" className=" btn btn-outline-success" aria-current="page">
+            Cronograma
+            </NavLink>
+  
+            <NavLink to="/agenda" className="btn btn-outline-success " aria-current="page">
+            Agenda
+            </NavLink>
+            <NavLink to="/reservas" className="btn btn-outline-success" aria-current="page">
+            Reservas
+            </NavLink>
+            <NavLink to="/usuario" className="btn btn-outline-success " aria-current="page">
+            Usuario
+            </NavLink>
+            
+            <NavLink to="/configuracion" className="btn btn-outline-success" aria-current="page">
+            Configuración
+            </NavLink>
+            
+            <button onClick={Outsesion} className="btn btn-outline-success">Cerrar sesión</button>
+            
           </ul>
+        </div>
         </div>
       </nav>
     </>

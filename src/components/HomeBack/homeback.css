@@ -1,0 +1,11 @@
+.table-dark th,
+td {
+  text-align: center;
+}
+
+.btn {
+  margin: 10px;
+}
+.active {
+  background-color: tomato;
+}

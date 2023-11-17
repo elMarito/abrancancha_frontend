@@ -112,30 +112,6 @@
   ],
   "usuarios": [
     {
-      "id": 1,
-      "nombre": "Usuario Uno",
-      "password": "aA@1234",
-      "email": "usuario1@example.com",
-      "telefono": "123-456-7890",
-      "estado": "activo"
-    },
-    {
-      "id": 2,
-      "nombre": "Usuario Dos",
-      "password": "bB@5678",
-      "email": "usuario2@example.com",
-      "telefono": "987-654-3210",
-      "estado": "inactivo"
-    },
-    {
-      "id": 3,
-      "nombre": "María Rodríguez",
-      "password": "cC@9012",
-      "email": "maria@example.com",
-      "telefono": "555-555-5555",
-      "estado": "activo"
-    },
-    {
       "id": 4,
       "nombre": "Carlos Martínez",
       "password": "dD@3456",
@@ -302,6 +278,76 @@
       "email": "marta@example.com",
       "telefono": "999-888-7777",
       "estado": "inactivo"
+    },
+    {
+      "email": "pepebanchi7@hotmail.com",
+      "password": "123",
+      "nombre": "Agustin",
+      "telefono": "44141",
+      "id": 25
+    },
+    {
+      "email": "pepebanchi7@hotmail.com",
+      "password": "123",
+      "nombre": "Agustin",
+      "telefono": "1414124",
+      "id": 26
+    },
+    {
+      "email": "pepebanchi7@hotmail.com",
+      "password": "111",
+      "nombre": "Agustin",
+      "telefono": "1414124",
+      "id": 27
+    },
+    {
+      "email": "mariop@gmail.com",
+      "password": "123",
+      "nombre": "Mario",
+      "telefono": "5555",
+      "id": 28
+    },
+    {
+      "email": "pepebanchi77@hotmail.com",
+      "password": "123",
+      "nombre": "agus",
+      "telefono": "1314",
+      "id": 29
+    },
+    {
+      "email": "nicom@example.com",
+      "password": "555",
+      "nombre": "Mario",
+      "telefono": "2244445077",
+      "id": 30
+    },
+    {
+      "email": "jcarlos@gmail.com",
+      "password": "2",
+      "nombre": "Juan carlos",
+      "telefono": "1414124111",
+      "id": 31
+    },
+    {
+      "email": "jcarlos@gmail.com",
+      "password": "2",
+      "nombre": "Juan carlos",
+      "telefono": "1414124111",
+      "id": 32
+    },
+    {
+      "email": "jcarlos@gmail.com",
+      "password": "2",
+      "nombre": "Juan carlos",
+      "telefono": "1414124111",
+      "id": 33
+    },
+    {
+      "email": "pepebanchi77@hotmail.com",
+      "password": "agub75077",
+      "nombre": "Agustin",
+      "telefono": "224444507",
+      "id": 34
     }
   ],
   "administradores": [
