@@ -30,16 +30,5 @@ const ButtonTurno = ({ hora, cancha, reserva }) => {
         </button>
     )
 }
-// ejemplso para copiar formatos de botones
-/* <td> 
-    <button type="button" className="edit btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal" data-cancha-id="${cancha.id}">
-        <i className="fa-regular fa-pen-to-square"></i>
-    </button>
-    <button type="button" className="btn btn-danger botonBorrar" data-cancha-id="${cancha.id}">
-        <i className="fa-solid fa-trash"></i>
-    </button>
-    <button type="button" className="view btn btn-info" data-bs-toggle="modal" data-bs-target="#viewModal" data-cancha-id="${cancha.id}">
-        <i className="fa-regular fa-eye"></i>
-    </button>
-</td> */
+
 export default ButtonTurno

@@ -1,10 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import Cancha from "./Cancha";
 import { appContext } from "../../../context/appContext";
-const BASE_URL = "http://localhost:3030/"
 import { ENDPOINTS, arrayToMap, fetchTranformTo, fetchCreate } from '../../../services/useFetch';
 
-// import { appContext } from '../../context/appContext';
 //-----------------------------------------------------------------------------
 const Canchas = () => {
   // const { name } = useParams() //name viene de la ruta /canchas/:name
@@ -12,31 +10,49 @@ const Canchas = () => {
   const { cache, setCache } = useContext(appContext);
   const tipos = cache.tiposCancha;
   const [canchas, setCanchas] = useState([]);
-  // const canchas={};
-  // const canchas = useFetch("https://fakestoreapi.com/products/categories");
 
+  const fetchCanchas = async () => {
+    try {
+      const allCanchas = await fetchTranformTo(ENDPOINTS.canchas);
+      let canchasMap = allCanchas.map((cancha) => {
+        return { ...cancha, tipo: tipos.get(cancha.idTipo) };
+        // const tipo = tipos.find((tipo) => tipo.id === cancha.idTipo);
+        // if (tipo)     return { ...cancha, tipo: tipo.nombre    };          
+        // return cancha;
+      });
+      setCanchas(canchasMap);
+      // const allCanchas = await fetchTranformTo(ENDPOINTS.canchas);
+      // falta filtrar las canchas del club x
+      // if (tipoCanchaElegido)
+      //     setCanchas(allCanchas.filter(cancha => cancha.idTipo === tipoCanchaElegido));
+      // else
+      // setCanchas(allCanchas);
+    } catch (error) {
+      console.log(error)/* alert("ojo") */ /* err = setError(err) */
+    }
+  }
   useEffect(() => {
-    // console.log("effect");
-    fetch(BASE_URL + ENDPOINTS.canchas)
-      .then(res => {
-        if (res.ok) return res.json();
-        throw new Error(`${res.status}. ${res.statusText}`);
-      })
-      .then(data => {
-        data = data.map((cancha) => {
-          return { ...cancha, tipo: tipos.get(cancha.idTipo) };
-          // const tipo = tipos.find((tipo) => tipo.id === cancha.idTipo);
-          // if (tipo)     return { ...cancha, tipo: tipo.nombre    };          
-          // return cancha;
-        });
+    fetchCanchas();
+    // const BASE_URL = "http://localhost:3030/"
+    // fetch(BASE_URL + ENDPOINTS.canchas)
+    //   .then(res => {
+    //     if (res.ok) return res.json();
+    //     throw new Error(`${res.status}. ${res.statusText}`);
+    //   })
+    //   .then(data => {
+    //     data = data.map((cancha) => {
+    //       return { ...cancha, tipo: tipos.get(cancha.idTipo) };
+    //       // const tipo = tipos.find((tipo) => tipo.id === cancha.idTipo);
+    //       // if (tipo)     return { ...cancha, tipo: tipo.nombre    };          
+    //       // return cancha;
+    //     });
 
-        setCanchas(data);
-        // setCache((prevState) => ({ ...prevState, categories: data, }));
-        // console.log(data);
-      })
-      .catch(error => console.log(error)/* alert("ojo") */ /* err = setError(err) */)
+    //     setCanchas(data);
+    //     // setCache((prevState) => ({ ...prevState, categories: data, }));
+    //     // console.log(data);
+    //   })
+    //   .catch(error => console.log(error)/* alert("ojo") */ /* err = setError(err) */)
   }, [])
-  // console.log("hol",canchas);
 
   if (canchas.lenght == 0) return (<></>);
 
@@ -170,26 +186,14 @@ function handleDelete(playerId) {
   }
 }
 //-----------------------------------------------------------------------------
-async function getTiposCancha() {
-  useEffect(() => {
-    // console.log("effect");
-    fetch(BASE_URL + "tipos_cancha")
-      .then(res => {
-        if (res.ok) return res.json();
-        throw new Error(`${res.status}. ${res.statusText}`);
-      })
-      .then(data => {
-        const tiposMap = new Map();
-        data.forEach((tipo) => { tiposMap.set(tipo.id, tipo.nombre) });
-        return tiposMap
-        // {canchas.map(cancha => (
-        //buscar indice
-        // setCanchas(cancha, data);
-        // ))}
-        // setCache((prevState) => ({ ...prevState, categories: data, }));
-        // console.log(data);
-      })
-      .catch(error => console.log(error)/* alert("ojo") */ /* err = setError(err) */)
-  }, [])
-
+const getTiposCancha = async () => {
+  try {
+    // const allTiposCanchas = await fetchTranformTo( ENDPOINTS.tipos_cancha, arrayToMap);
+    const allTiposCanchas = await fetchTranformTo(ENDPOINTS.tipos_cancha);
+    const tiposMap = new Map();
+    allTiposCanchas.forEach((tipo) => { tiposMap.set(tipo.id, tipo.nombre) });
+    return tiposMap
+  } catch (error) {
+    console.log(error)/* alert("ojo") */ /* err = setError(err) */
+  }
 }

@@ -1,7 +1,7 @@
 import { createContext, useState, useEffect, useContext } from "react";
 import DbAdapter, { getAllData2 } from "../services/dbAdapter";
 // import ErrorMsg from "../components/ErrorMsg";
-import { useFetch } from "../services/useFetch";
+import { fetchTranformTo, useFetch } from "../services/useFetch";
 import { AUTORIZATION_LEVEL } from "../components/LoginForm/Loginform";
 
 export const appContext = createContext({});
@@ -10,7 +10,6 @@ export const appContext = createContext({});
 //   tiposCancha: new Map()});
 
 export const AppContextProvider = ({ children }) => {
-  // const BASE_URL = 'https://fakestoreapi.com/products';
   // const [products, setProducts] = useState([]);
   // const [error, setError] = useState(null);
 
@@ -29,21 +28,32 @@ export const AppContextProvider = ({ children }) => {
     tiposCancha: new Map()
   });
 
+  const getTiposCancha = async () => {
+    try {
+      const allTiposCanchas = await fetchTranformTo(ENDPOINTS.tipos_cancha);
+      const tiposMap = new Map();
+      allTiposCanchas.forEach((tipo) => { tiposMap.set(tipo.id, tipo.nombre) });
+      setCache(prev => ({ ...prev, tiposCancha: tiposMap }));
+    } catch (error) {
+      console.log(error)/* alert("ojo") */ /* err = setError(err) */
+    }
+  }
+  
   useEffect(() => {
-    // console.log("effect");
-    fetch(BASE_URL + "tipos_cancha")
-      .then(res => {
-        if (res.ok) return res.json();
-        throw new Error(`${res.status}. ${res.statusText}`);
-      })
-      .then(data => {
-        const tiposMap = new Map();
-        data.forEach((tipo) => { tiposMap.set(tipo.id, tipo.nombre) });
-        setCache(prev => ({ ...prev, tiposCancha: tiposMap }));
-        // setCache((prevState) => ({ ...prevState, categories: data, }));
-        // console.log(data);
-      })
-      .catch(error => console.log(error)/* alert("ojo") */ /* err = setError(err) */)
+    getTiposCancha()
+    // fetch(BASE_URL + "tipos_cancha")
+    //   .then(res => {
+    //     if (res.ok) return res.json();
+    //     throw new Error(`${res.status}. ${res.statusText}`);
+    //   })
+    //   .then(data => {
+    //     const tiposMap = new Map();
+    //     data.forEach((tipo) => { tiposMap.set(tipo.id, tipo.nombre) });
+    //     setCache(prev => ({ ...prev, tiposCancha: tiposMap }));
+    //     // setCache((prevState) => ({ ...prevState, categories: data, }));
+    //     // console.log(data);
+    //   })
+    //   .catch(error => console.log(error)/* alert("ojo") */ /* err = setError(err) */)
   }, [])
   // const [cache, setCache] = useState({
   //   dbAdapter: new DbAdapter(BASE_URL),

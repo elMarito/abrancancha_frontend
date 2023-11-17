@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-// const BASE_END_POINT = '/players';
+
 const CONTENT_TYPE_APPLICATION_JSON = { 'Content-Type': 'application/json' };
 const BASE_URL = "http://localhost:3030";
 // const BASE_URL = "http://localhost:3000"; // api funcionando
