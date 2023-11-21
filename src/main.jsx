@@ -1,11 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import { AppContextProvider } from './context/appContext';
 import App from './App'
 import PrivateRoute from './components/PrivateRoute';
 import Home from './components/Home/Home';
 import Login from './components/LoginForm/Login';
 import HomeBack from './components/HomeBack/HomeB';
-import { AUTORIZATION_LEVEL } from './components/LoginForm/Loginform';
+import { AUTORIZATION_LEVEL } from './components/LoginForm/Login';
 import { createBrowserRouter } from 'react-router-dom';
 
 const route = createBrowserRouter([
@@ -30,6 +31,14 @@ const route = createBrowserRouter([
 ])
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
-<App></App>
+  // <React.StrictMode>
+  <AppContextProvider>
+    {/* <RouterProvider router={route}> */}
+      {/* <BrowserRouter> */}
+      <App />
+      {/* </BrowserRouter> */}
+    {/* </RouterProvider> */}
+  </AppContextProvider>
+  //   </React.StrictMode>,
 
 )

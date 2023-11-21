@@ -1,18 +1,37 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './LoginStyles.css';
 import Navbar from '../Navbar/Navbar';
 import Footer from '../Footer/Footer';
 import { useNavigate } from "react-router-dom";
-const Login = ({ setIsAuthenticated }) => {
+import { ENDPOINTS, fetchTranformTo } from '../../services/useFetch';
+import { appContext } from '../../context/appContext';
+export const AUTORIZATION_LEVEL = {
+  User: 1,
+  Operator: 2,
+  Administrator: 3
+};
+const Login = ({ setIsAuthenticated, setAutorizationLevel }) => {
+  const { cache, setCache } = useContext(appContext);
   const [nombre, setNombre] = useState('');
   const [telefono, setTelefono] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-
-
   const [isRegistering, setIsRegistering] = useState(false);
   const navigate = useNavigate();
+
+  const getAutorizacionLevel = async (userId) => {
+    try {
+      // const canchasMap = await fetchTranformTo( ENDPOINTS.canchas, arrayToMap);
+      const allAdministradores = await fetchTranformTo(ENDPOINTS.administradores);
+      // se podria filtrar x club
+      const administrador = allAdministradores.find((admin) => admin.idUsuario === userId);
+      return administrador ? AUTORIZATION_LEVEL.Administrator : 0;
+    } catch (error) {
+      console.log(error)/* alert("ojo") */ /* err = setError(err) */
+    }
+  }
+
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -25,24 +44,33 @@ const Login = ({ setIsAuthenticated }) => {
         if (response.ok) {
           const data = await response.json();
           const user = data.find((user) => user.email === email && user.password === password);
-          Swal.fire(
-            'Acceso correcto',
-            ' Jugador ingresado con éxito',
-            'success',
-          );
+          // Swal.fire(
+          //   'Acceso correcto',
+          //   ' Jugador ingresado con éxito',
+          //   'success',
+          // );
           if (user) {
             setIsAuthenticated(true);
+            const autorizationLevel = getAutorizacionLevel(user.id);
+            setAutorizationLevel(autorizationLevel)
             setNombre(user.nombre); // Actualizar el estado del nombre con el nombre del usuario
+            setCache((prevState) => ({ ...prevState, user: user }));
+            console.log("autorizationLevel:::", autorizationLevel);
             Swal.fire(
               'Acceso correcto',
               `¡Bienvenido, ${user.nombre}!`, // Usar el nombre del usuario en el mensaje
               'success',
             );
+            if (autorizationLevel === AUTORIZATION_LEVEL.Administrator)
+              navigate("/buscar-canchas");
+            else
+              navigate("/");
+
           } else {
             Swal.fire('Error', 'No se pudo acceder', 'error');
           }
         }
-        navigate("/buscar-canchas");
+        // navigate("/buscar-canchas");
       } catch (error) {
         // Manejar errores de conexión a la API
       }
@@ -52,7 +80,7 @@ const Login = ({ setIsAuthenticated }) => {
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    if (email , password, nombre, telefono ) {
+    if (email, password, nombre, telefono) {
       try {
         const response = await fetch('http://localhost:3030/usuarios', {
           method: 'POST',
@@ -63,16 +91,16 @@ const Login = ({ setIsAuthenticated }) => {
         });
 
         if (response.ok) {
-          
+
           setIsAuthenticated(true);
           Swal.fire(
             'Registro correcto',
             ' Jugador registrado con éxito',
             'success',
           );
-          
+
         }
-        
+
         else {
           Swal.fire('Error', 'No se pudo Registrar al jugador', 'error');
         }
@@ -89,117 +117,117 @@ const Login = ({ setIsAuthenticated }) => {
   const mensaje = isRegistering ? 'Crear Usuario' : 'Ingresa los datos de acceso';
 
   return (
-  <>
-    <Navbar />
-    <div className="container-fluid formcontent">
-      <div className="row p-5">
-        <div className="col-lg-8 col-md-6 g-4 pb-3 text-center">
-          <h1>Bienvenido {nombre}</h1>
-          <img src="src/assets/abc_login.svg" alt="" width="300" />
-        </div>
-        <div className="col-lg-4 col-md-6">
-          <form
-            className="form-container formlogin"
-            onSubmit={isRegistering ? handleRegister : handleLogin}
-          >
-            <p>{mensaje}</p>
-            {!!isRegistering && (
-            <>
+    <>
+      <Navbar ocultarBoton={true} />
+      <div className="container-fluid formcontent">
+        <div className="row p-5">
+          <div className="col-lg-8 col-md-6 g-4 pb-3 text-center">
+            <h1>Bienvenido {nombre}</h1>
+            <img src="src/assets/abc_login.svg" alt="" width="300" />
+          </div>
+          <div className="col-lg-4 col-md-6">
+            <form
+              className="form-container formlogin"
+              onSubmit={isRegistering ? handleRegister : handleLogin}
+            >
+              <p>{mensaje}</p>
+              {!!isRegistering && (
+                <>
+                  <div className="form-group">
+                    <label htmlFor="exampleInputNombre1">Nombre:</label>
+                    <input
+                      onChange={(e) => setNombre(e.target.value)}
+                      type="text"
+                      className="form-control"
+                      id="exampleInputNombre1"
+                      placeholder="Nombre Completo"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="exampleInputTelefono1">Teléfono:</label>
+                    <input
+                      onChange={(e) => setTelefono(e.target.value)}
+                      type="tel"
+                      pattern="[0-9]{10}"
+                      className="form-control"
+                      id="exampleInputTelefono1"
+                      placeholder="123456789"
+                    />
+                  </div>
+                </>
+              )}
+
               <div className="form-group">
-                <label htmlFor="exampleInputNombre1">Nombre:</label>
+                <label htmlFor="exampleInputEmail1">Email:</label>
                 <input
-                onChange={(e) => setNombre(e.target.value)}
-                  type="text"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  type="email"
                   className="form-control"
-                  id="exampleInputNombre1"
-                  placeholder="Nombre Completo"
+                  id="exampleInputEmail1"
+                  aria-describedby="emailHelp"
+                  placeholder="tu_email@ejemplo.com"
+                  /* pattern="[ /^(([^<>()[\]\.,;:\s@\" */ size="30"
+                  required
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="exampleInputTelefono1">Teléfono:</label>
+                <label htmlFor="exampleInputPassword1">Contraseña:</label>
                 <input
-                onChange={(e) => setTelefono(e.target.value)}
-                  type="tel"
-                  pattern="[0-9]{10}"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  type="password"
                   className="form-control"
-                  id="exampleInputTelefono1"
-                  placeholder="123456789"
+                  id="exampleInputPassword1"
+                  placeholder="xxxxxx"
+
+                  minLength={8}
+
+                  required
                 />
               </div>
-            </>
-          )}
 
-            <div className="form-group">
-              <label htmlFor="exampleInputEmail1">Email:</label>
-              <input
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                type="email"
-                className="form-control"
-                id="exampleInputEmail1"
-                aria-describedby="emailHelp"
-                placeholder="tu_email@ejemplo.com"
-                pattern="[ /^(([^<>()[\]\.,;:\s@\" size="30"
-                required
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="exampleInputPassword1">Contraseña:</label>
-              <input
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                type="password"
-                className="form-control"
-                id="exampleInputPassword1"
-                placeholder="xxxxxx"
-                
-                minLength={8}
-                
-                required
-              />
-            </div>
+              <div className="d-grid gap-2 p-3 d-sm-flex justify-content-sm-center">
+                <button
+                  onClick={onsubmit}
+                  className={isRegistering ? "ingreso_btn" : "ingreso_btn gray"}
+                  type="submit"
+                >
+                  {isRegistering ? "Registrar" : "Ingresar"}
+                </button>
+                <button
+                  className={isRegistering ? "ingreso_btn gray" : "ingreso_btn"}
+                  type="button"
+                  onClick={toggleRegister}
+                >
+                  {isRegistering ? "¿Ya tienes cuenta?" : "Crear usuario"}
+                </button>
+              </div>
 
-            <div className="d-grid gap-2 p-3 d-sm-flex justify-content-sm-center">
-              <button
-              onClick={onsubmit}
-                className={isRegistering ? "ingreso_btn" : "ingreso_btn gray"}
-                type="submit"
-              >
-                {isRegistering ? "Registrar" : "Ingresar"}
-              </button>
-              <button
-                className={isRegistering ? "ingreso_btn gray" : "ingreso_btn"}
-                type="button"
-                onClick={toggleRegister}
-              >
-                {isRegistering ? "¿Ya tienes cuenta?" : "Crear usuario"}
-              </button>
-            </div>
+              {!isRegistering && (
+                <div className="text-center">
+                  <a className="small" href="#">
+                    ¿Olvidaste tu contraseña?
+                  </a>
+                </div>
+              )
+              }
 
-            {!isRegistering && (
-              <div className="text-center">
+              <div className="text-center p-2">
                 <a className="small" href="#">
-                  ¿Olvidaste tu contraseña?
+                  <i className="fa-brands fa-facebook-f"></i>
+                </a>
+                <a className="small" href="#">
+                  <i className="fa-brands fa-instagram"></i>
                 </a>
               </div>
-            )
-            }
-
-            <div className="text-center p-2">
-              <a className="small" href="#">
-                <i className="fa-brands fa-facebook-f"></i>
-              </a>
-              <a className="small" href="#">
-                <i className="fa-brands fa-instagram"></i>
-              </a>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
-    <Footer />
-  </>
-);
+      <Footer />
+    </>
+  );
 };
 
 export default Login;

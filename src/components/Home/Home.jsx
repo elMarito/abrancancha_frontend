@@ -4,19 +4,19 @@ import Banner from '../Banner/Banner'
 import Gallery from '../Gallery/ImgGallery'
 import Footer from '../Footer/Footer'
 import Search from '../Search/Search'
-function Home() {
-  const isAuthenticated = true
+import { Route, Routes } from 'react-router-dom'
+function Home({isAuthenticated}) {
+  // const isAuthenticated = false
   return (
     <>
       <Navbar />
       {isAuthenticated
-        ? <Search />
+        ? <Routes> <Route path="search" element={<Search />} /></Routes>
         : null
         /* <Banner/>
         <Gallery/> */
       }
       <Footer />
-
     </>
   )
 }
