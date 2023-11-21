@@ -3,7 +3,7 @@ import './LoginStyles.css';
 import Navbar from '../Navbar/Navbar';
 import Footer from '../Footer/Footer';
 import { useNavigate } from "react-router-dom";
-import { ENDPOINTS, fetchTranformTo } from '../../services/useFetch';
+import { ENDPOINTS, fetchCreate, fetchTranformTo } from '../../services/useFetch';
 import { appContext } from '../../context/appContext';
 export const AUTORIZATION_LEVEL = {
   User: 1,
@@ -22,7 +22,6 @@ const Login = ({ setIsAuthenticated, setAutorizationLevel }) => {
 
   const getAutorizacionLevel = async (userId) => {
     try {
-      // const canchasMap = await fetchTranformTo( ENDPOINTS.canchas, arrayToMap);
       const allAdministradores = await fetchTranformTo(ENDPOINTS.administradores);
       // se podria filtrar x club
       const administrador = allAdministradores.find((admin) => admin.idUsuario === userId);
@@ -37,39 +36,41 @@ const Login = ({ setIsAuthenticated, setAutorizationLevel }) => {
 
     if (email && password) {
       try {
-        const response = await fetch('http://localhost:3030/usuarios', {
-          method: 'GET',
-        });
+        // const response = await fetch('http://localhost:3030/usuarios', {
+        //   method: 'GET',
+        // });
 
-        if (response.ok) {
-          const data = await response.json();
-          const user = data.find((user) => user.email === email && user.password === password);
-          // Swal.fire(
-          //   'Acceso correcto',
-          //   ' Jugador ingresado con éxito',
-          //   'success',
-          // );
-          if (user) {
-            setIsAuthenticated(true);
-            const autorizationLevel = getAutorizacionLevel(user.id);
-            setAutorizationLevel(autorizationLevel)
-            setNombre(user.nombre); // Actualizar el estado del nombre con el nombre del usuario
-            setCache((prevState) => ({ ...prevState, user: user }));
-            console.log("autorizationLevel:::", autorizationLevel);
-            Swal.fire(
-              'Acceso correcto',
-              `¡Bienvenido, ${user.nombre}!`, // Usar el nombre del usuario en el mensaje
-              'success',
-            );
-            if (autorizationLevel === AUTORIZATION_LEVEL.Administrator)
-              navigate("/buscar-canchas");
-            else
-              navigate("/");
+        // if (response.ok) {
+        //   const data = await response.json();
+        //   const user = data.find((user) => user.email === email && user.password === password);
+        // Swal.fire(
+        //   'Acceso correcto',
+        //   ' Jugador ingresado con éxito',
+        //   'success',
+        // );
+        const allUsuarios = await fetchTranformTo(ENDPOINTS.usuarios);
+        const user = allUsuarios.find((user) => user.email === email && user.password === password);
+        if (user) {
+          setIsAuthenticated(true);
+          const autorizationLevel = getAutorizacionLevel(user.id);
+          setAutorizationLevel(autorizationLevel)
+          setNombre(user.nombre); // Actualizar el estado del nombre con el nombre del usuario
+          setCache((prevState) => ({ ...prevState, user: user }));
+          console.log("autorizationLevel:::", autorizationLevel);
+          Swal.fire(
+            'Acceso correcto',
+            `¡Bienvenido, ${user.nombre}!`, // Usar el nombre del usuario en el mensaje
+            'success',
+          );
+          if (autorizationLevel === AUTORIZATION_LEVEL.Administrator)
+            navigate("/buscar-canchas");
+          else
+            navigate("/");
 
-          } else {
-            Swal.fire('Error', 'No se pudo acceder', 'error');
-          }
+        } else {
+          Swal.fire('Error', 'No se pudo acceder', 'error');
         }
+        // }
         // navigate("/buscar-canchas");
       } catch (error) {
         // Manejar errores de conexión a la API
@@ -82,14 +83,14 @@ const Login = ({ setIsAuthenticated, setAutorizationLevel }) => {
 
     if (email, password, nombre, telefono) {
       try {
-        const response = await fetch('http://localhost:3030/usuarios', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ email, password, nombre, telefono }),
-        });
-
+        // const response = await fetch('http://localhost:3030/usuarios', {
+        //   method: 'POST',
+        //   headers: {
+        //     'Content-Type': 'application/json',
+        //   },
+        //   body: JSON.stringify({ email, password, nombre, telefono }),
+        // });
+        const response = await fetchCreate(ENDPOINTS.usuarios, { email, password, nombre, telefono });
         if (response.ok) {
 
           setIsAuthenticated(true);

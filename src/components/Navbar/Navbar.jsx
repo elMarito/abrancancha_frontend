@@ -32,39 +32,20 @@ function Navbar({ ocultarBoton }) {
       setUserLoger("Logout");
 
     } else {
+      setCache((prevState) => ({ ...prevState, user: null }));
       setUserLoger("Login");
       navigate("/");
       window.location.reload();
     }
   }
   const updateFiltroTipoCancha = (tipoCancha) => {
-    // filtros: { tipoCancha: null, fecha: null, hora: null }
-    // if (tipoCancha=== undefined) tipoCancha=cache.filtros.tipoCancha;
-    // if (tipoCancha=== undefined) tipoCancha=cache.filtros.tipoCancha;
-    // if (tipoCancha=== undefined) tipoCancha=cache.filtros.tipoCancha;
     const newSelectedCategories = { tipoCancha, fecha, hora }
-    // console.log("updateFiltroTipoCancha", tipoCancha, fecha, hora );
     setCache((prevState) => ({ ...prevState, filtros: newSelectedCategories }));
-    // console.log("cache.filtros", cache.filtros );
   }
 
   const updateFiltroFecha = (fechaElegida) => {
-
-    // const fechaDMY_array = `${fechaElegida.toISOString().split('T')[0]}T03:00:00Z`;
-    //   const getDateSeparated = (dateTime) => {      // const dateTime = new Date("2023-10-21T10:00:00Z");
-    //     const date = dateTime.toISOString().split('T')[0];
-    //     const time = dateTime.toISOString().split('T')[1].split('Z')[0];
-    //     return [date, time]
-    // }
-    // const fechaDMY_array = fecha.toLocaleDateString().split("/")
-    // const dateDMY = (f) => {return `${f[2]}-${f[1]}-${f[0]}T03:00:00Z`}
-    // {console.log("updateFiltroFecha-",fecha, fechaDMY_array)}
-    // const newSelectedCategories = { tipoCancha, fecha:dateDMY(fechaDMY_array), hora }
-
     const newSelectedCategories = { tipoCancha, fecha: fechaElegida.toISOString(), hora }
-    // console.log("updateFiltroFecha", tipoCancha, fecha, hora );
     setCache((prevState) => ({ ...prevState, filtros: newSelectedCategories }));
-    // console.log("cache.filtros", cache.filtros );
   }
   // const updateFiltroHora = (hora) => {
   //   const newSelectedCategories = { tipoCancha, fecha, hora }
