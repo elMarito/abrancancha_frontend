@@ -1,10 +1,12 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
+import { appContext } from '../context/appContext';
 
 const ProtectedRoute = ({isAuthenticated, children }) => {
+  // const { cache, setCache } = useContext(appContext);
+  // cache.user.au != AUTORIZATION_LEVEL.Administrator
   
-
   // Implementa la lógica de autenticación aquí, por ejemplo, puedes comprobar si el usuario tiene un token de sesión válido, etc.
 
   if (isAuthenticated) {

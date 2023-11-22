@@ -4,7 +4,6 @@ import { ENDPOINTS, fetchTranformTo } from '../../services/useFetch';
 const SelectTipoCancha = () => {
     const [tiposCancha, setTiposCancha] = useState([]);
     //-------------------------------------------------------------------------
-    // necesito reservas, canchas     
     const fetchTiposCancha = async () => {
         try {
             // const canchasMap = await fetchTranformTo( ENDPOINTS.canchas, arrayToMap);

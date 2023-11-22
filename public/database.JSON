@@ -258,11 +258,11 @@
       "email": "sara@example.com",
       "telefono": "111-222-3333",
       "estado": "activo"
-    },
+    },  
     {
       "id": 21,
       "nombre": "Manuel Pérez",
-      "password": "uU@12345",
+      "password": "12345678",
       "email": "manuel@example.com",
       "telefono": "444-555-6666",
       "estado": "activo"

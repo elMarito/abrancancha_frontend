@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
+import { appContext } from '../../context/appContext';
+import { cerrarSesion } from '../Navbar/Navbar';
 
 function NavBarBack() {
+  // const { cache, setCache } = useContext(appContext);
 
   const Outsesion=()=>{
+    cerrarSesion();
     window.location.reload();
   }
   return (

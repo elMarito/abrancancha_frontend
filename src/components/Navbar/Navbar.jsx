@@ -1,25 +1,19 @@
 import React, { useContext } from 'react'
 import './NavbarStyles.css'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import { appContext } from '../../context/appContext';
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import { useNavigate } from "react-router-dom";
 import Home from '../Home/Home';
 import "react-datepicker/dist/react-datepicker.css";
-import { appContext } from '../../context/appContext';
 import SelectTipoCancha from './SelectTipoCancha';
 // import Login from '../LoginForm/Login';
 // import Register from './Register';
 
 function Navbar({ ocultarBoton }) {
   const { cache, setCache } = useContext(appContext);
-  // Crear una copia del estado actual de filtros
-  // const nuevosFiltros = { ...cache.filtros };
-
   const { tipoCancha, fecha, hora } = cache.filtros;
-  // const [tipoCancha, setTipoCancha] = useState(cache.filtros.sssssss);
-  // const [fecha, setFecha] = useState(cache.filtros.sssssss);
-  // const [hora, setHora] = useState(cache.filtros.sssssss);
 
   // const [startDate, setStartDate] = useState(new Date());
   const [userloger, setUserLoger] = useState("Login")
@@ -30,9 +24,9 @@ function Navbar({ ocultarBoton }) {
       // {cache.user && (<p>{cache.user.nombre}</p>)}
       // setUserLoger((cache.user ? cache.user.nombre : "") + " Logout");
       setUserLoger("Logout");
-
+// setCache((prevState) => ({ ...prevState, user: null }));
     } else {
-      setCache((prevState) => ({ ...prevState, user: null }));
+      cerrarSesion();      // setCache((prevState) => ({ ...prevState, user: null }));
       setUserLoger("Login");
       navigate("/");
       window.location.reload();
@@ -115,13 +109,13 @@ function Navbar({ ocultarBoton }) {
               <Link to="/search" className="nav-link" aria-current="page" href="#">
                 <button className='search_btn'>Buscar Cancha</button>
               </Link>
-              {ocultarBoton ? <></>:
+              {ocultarBoton ? <></> :
                 <Link to="/login" className="nav-link" aria-current="page" href="#">
                   {cache.user && (<p>{cache.user.nombre}</p>)}
                   <button onClick={logeado} className='login_btn'>
                     <i className="fa-regular fa-user"></i>{userloger}
                   </button>
-                </Link> 
+                </Link>
               }
 
             </ul>
@@ -134,3 +128,13 @@ function Navbar({ ocultarBoton }) {
 }
 
 export default Navbar;
+
+export const cerrarSesion = (/* setUserLoger */) => {
+  const { cache, setCache } = useContext(appContext);
+  setCache((prevState) => ({ ...prevState, user: null }));
+  // setUserLoger("Login");
+  // const navigate = useNavigate();
+  // navigate("/");
+  // window.location.reload();
+}
+

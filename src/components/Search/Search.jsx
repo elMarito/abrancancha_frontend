@@ -4,16 +4,11 @@ import CanchaConTurnos from './CanchaConTurnos';
 import { appContext } from '../../context/appContext';
 import { useNavigate } from "react-router-dom";
 
-// const Search = ({tipoCanchaElegido, fechaElegida, horaElegida}) => {
 const Search = () => {
     const { cache, setCache } = useContext(appContext);
     const { tipoCancha, fecha, hora } = cache.filtros;
-    // const loggedUserId = cache.user.id;
-    // console.log("search",cache.filtros);
-    // const [tipoCanchaElegido, setTipoCancha] = useState(1);
-    // const [fechaElegida, setFecha] = useState("2023-10-21T10:00:00Z");
-    // const [horaElegida, setHora] = useState("10:00");
-    const loggedUserId = 1;
+    const loggedUserId = cache.user.id;
+    // const loggedUserId = 1;
     const navigate = useNavigate();
 
     const [refreshReservas, setRefreshReservas] = useState(false);
