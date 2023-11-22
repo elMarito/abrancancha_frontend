@@ -1,11 +1,10 @@
-import React, { useContext } from 'react'
-import './NavbarStyles.css'
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import React, { useContext,useState } from 'react'
 import { appContext } from '../../context/appContext';
-import { useState } from "react";
-import DatePicker from "react-datepicker";
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import { useNavigate } from "react-router-dom";
+import DatePicker from "react-datepicker";
 import Home from '../Home/Home';
+import './NavbarStyles.css'
 import "react-datepicker/dist/react-datepicker.css";
 import SelectTipoCancha from './SelectTipoCancha';
 // import Login from '../LoginForm/Login';
@@ -14,9 +13,11 @@ import SelectTipoCancha from './SelectTipoCancha';
 function Navbar({ ocultarBoton }) {
   const { cache, setCache } = useContext(appContext);
   const { tipoCancha, fecha, hora } = cache.filtros;
+  // const { usuario } = cache.user;
 
   // const [startDate, setStartDate] = useState(new Date());
-  const [userloger, setUserLoger] = useState("Login")
+  // const [userloger, setUserLoger] = useState("Login")
+  const [userloger, setUserLoger] = useState(cache.user ? "Logout" : "Login")
   const navigate = useNavigate();
 
   const logeado = () => {
@@ -24,12 +25,14 @@ function Navbar({ ocultarBoton }) {
       // {cache.user && (<p>{cache.user.nombre}</p>)}
       // setUserLoger((cache.user ? cache.user.nombre : "") + " Logout");
       setUserLoger("Logout");
-// setCache((prevState) => ({ ...prevState, user: null }));
+      // setCache((prevState) => ({ ...prevState, user: null }));
     } else {
-      cerrarSesion();      // setCache((prevState) => ({ ...prevState, user: null }));
+      // const { cache, setCache } = useContext(appContext);
+      setCache((prevState) => ({ ...prevState, user: null }));
+      // cerrarSesion();      // setCache((prevState) => ({ ...prevState, user: null }));
       setUserLoger("Login");
-      navigate("/");
-      window.location.reload();
+      navigate("/", { replace: true });
+      // window.location.reload();
     }
   }
   const updateFiltroTipoCancha = (tipoCancha) => {
@@ -68,7 +71,7 @@ function Navbar({ ocultarBoton }) {
               <li className="nav-item dropdown">
                 {/* <li className="nav-item"> */}
                 {/* tipoCancha */}
-                <select className="custom-select" defaultValue="Elige Deporte"
+                <select id='tipoDeCancha' className="custom-select" defaultValue="Elige Deporte"
                   onChange={(event) => updateFiltroTipoCancha(Number(event.target.value))}>
                   {/* <option value="Elige Deporte" disabled> Elige Deporte </option> */}
                   <option value={0} > Elige Deporte </option>
@@ -83,7 +86,7 @@ function Navbar({ ocultarBoton }) {
               </li>
               <li className="nav-item">
                 <i className="fa-regular fa-calendar-days"></i>
-                <DatePicker
+                <DatePicker id='fechaDelTurno'
                   selected={new Date(fecha)}
                   todayButton="Ver hoy"
                   dateFormat="dd/MM/yyyy"

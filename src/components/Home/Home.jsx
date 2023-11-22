@@ -7,14 +7,18 @@ import Search from '../Search/Search'
 import { Route, Routes } from 'react-router-dom'
 function Home({isAuthenticated}) {
   // const isAuthenticated = false
+  // console.log({isAuthenticated});
   return (
     <>
       <Navbar />
       {isAuthenticated
+        // ? <Search />
         ? <Routes> <Route path="search" element={<Search />} /></Routes>
-        : null
-        /* <Banner/>
-        <Gallery/> */
+        //tambien se podria mostra "MIS RESERVAS Y MI PERFIL"
+        : <>
+        <Banner/>
+        <Gallery/>
+        </>
       }
       <Footer />
     </>

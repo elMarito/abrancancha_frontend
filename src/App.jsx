@@ -18,23 +18,26 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   // const [autorizationLevel, setAutorizationLevel] = useState(0);
   const { cache, setCache } = useContext(appContext);
-  const autorizationLevel =  cache.user? cache.user.autorizationLevel : 0;
-  const users = useContext(useContext)
-  // console.log(users);
+  const autorizationLevel = cache.user ? cache.user.autorizationLevel : 0;
+
+  
+  // const users = useContext(userContext)
+  // console.log(autorizationLevel);
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/*" element={<Home isAuthenticated={autorizationLevel != AUTORIZATION_LEVEL.Administrator} />} />
         <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} /* setAutorizationLevel={setAutorizationLevel} */ />} />
-          {/* <Route path="buscar-canchas" element={<HomeB />} /> */}
+        {/* <Route path="buscar-canchas" element={<HomeB />} /> */}
         <Route element={<ProtectedRoute isAuthenticated={autorizationLevel === AUTORIZATION_LEVEL.Administrator} />}>
           <Route path="buscar-canchas" element={<HomeB />} />
           <Route path="cronograma" element={<Cronograma />} />
 
           <Route path="agenda" element={<Agenda />} />
           <Route path="reservas" element={<Reservas />} />
-          <Route path="usuario" element={<Usuario />} />
-          <Route path="administradores" element={<Administradores />} />
+          <Route path="usuario" element={<Usuario autorizationLevel={AUTORIZATION_LEVEL.User} />} />
+          <Route path="administradores" element={<Usuario autorizationLevel={AUTORIZATION_LEVEL.Administrator} />} />
+          {/* <Route path="administradores" element={<Administradores autorizationLevel={AUTORIZATION_LEVEL.Administrator}/>} /> */}
           <Route path="configuracion" element={<Configuracion />} />
         </Route>
       </Routes>

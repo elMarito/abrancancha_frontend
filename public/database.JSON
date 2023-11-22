@@ -258,7 +258,7 @@
       "email": "sara@example.com",
       "telefono": "111-222-3333",
       "estado": "activo"
-    },  
+    },
     {
       "id": 21,
       "nombre": "Manuel Pérez",
@@ -450,6 +450,13 @@
       "fecha": "2023-10-13T05:00:00Z",
       "estado": "confirmada",
       "id": 19
+    },
+    {
+      "idUsuario": 1,
+      "idCancha": 3,
+      "fecha": "2023-11-22T04:00:00Z",
+      "estado": "confirmada",
+      "id": 20
     }
   ],
   "agendas": [

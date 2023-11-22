@@ -5,7 +5,8 @@ import { appContext } from '../context/appContext';
 
 const ProtectedRoute = ({isAuthenticated, children }) => {
   // const { cache, setCache } = useContext(appContext);
-  // cache.user.au != AUTORIZATION_LEVEL.Administrator
+  // const autorizationLevel =  cache.user? cache.user.autorizationLevel : 0;
+  // cache.user.autorizationLevel != AUTORIZATION_LEVEL.Administrator
   
   // Implementa la lógica de autenticación aquí, por ejemplo, puedes comprobar si el usuario tiene un token de sesión válido, etc.
 

@@ -91,7 +91,8 @@ const Login = ({ setIsAuthenticated/* , setAutorizationLevel */ }) => {
         if (autorizationLevel === AUTORIZATION_LEVEL.Administrator)
           navigate("/buscar-canchas");
         else
-          navigate("/");
+          navigate("/" 
+          , { replace: true });
 
       } else {
         Swal.fire('Error', 'No se pudo acceder', 'error');

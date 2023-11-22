@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 const Search = () => {
     const { cache, setCache } = useContext(appContext);
     const { tipoCancha, fecha, hora } = cache.filtros;
-    const loggedUserId = cache.user.id;
+    // const loggedUserId = cache.user.id; cache.user? cache.user.autorizationLevel : 0;
     // const loggedUserId = 1;
     const navigate = useNavigate();
 
@@ -39,7 +39,7 @@ const Search = () => {
     }
     const fetchReservas = async () => {
         try {
-            const allReservas = await fetchTranformTo("reservas");
+            const allReservas = await fetchTranformTo(ENDPOINTS.reservas);
             // aplicar filtros
             // dataReservas.map(/**filtrar x fecha x tipo de cancha */)
 
@@ -101,15 +101,15 @@ const Search = () => {
             });
             
             return
-        } else if (cache.user.id != loggedUserId) {
-            Swal.fire({
-                title: 'Horario no disponible',
-                text: "Esta reservado por otro usuario.",
-                icon: 'warning',
-                showConfirmButton: false,
-                timer: 1500
-            })
-            return
+        // } else if (cache.user.id != loggedUserId) {
+        //     Swal.fire({
+        //         title: 'Horario no disponible',
+        //         text: "Esta reservado por otro usuario.",
+        //         icon: 'warning',
+        //         showConfirmButton: false,
+        //         timer: 1500
+        //     })
+        //     return
         }
 
         // console.log(btn.getAttribute('data-cancha-id'));
@@ -121,7 +121,8 @@ const Search = () => {
         if (btn.classList.contains('view')) {
             const usuarioId = Number(btn.getAttribute('data-usuario-id'));
             // console.log(loggedUserId,"usuarioId",usuarioId);
-            if (usuarioId === loggedUserId) {
+            // if (usuarioId === loggedUserId) {
+            if (usuarioId === cache.user.id) {
                 Swal.fire({
                     title: 'Turno Reservado por ti',
                     html: `Tienes una reserva en la cancha: <b><u> ${btn.getAttribute('data-cancha-nombre')} </u></b> <br>
@@ -142,7 +143,14 @@ const Search = () => {
                 });
             }
             else
-                return
+            Swal.fire({
+                title: 'Horario no disponible',
+                text: "Esta reservado por otro usuario.",
+                icon: 'warning',
+                showConfirmButton: false,
+                timer: 1500
+            })
+                // return
             // Swal.fire({
             //     title: 'Horario no disponible',
             //     text: "Esta accion no se puede deshacer!",

@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import Usuario from "./Usuario";
 import NavBarBack from '../HomeBack/NavbarBack';
-import { fetchTranformTo } from "../../services/useFetch";
+import { ENDPOINTS, fetchTranformTo } from "../../services/useFetch";
 
 // import { appContext } from '../../context/appContext';
 //-----------------------------------------------------------------------------
-const Administradores = () => {
+const Administradores = ({autorizationLevel}) => {
   const [usuarios, setUsuarios] = useState([]);
 
   const fetchAdministradores = async () => {
@@ -18,21 +18,6 @@ const Administradores = () => {
   }
   useEffect(() => {
     fetchAdministradores()
-
-    // const BASE_URL = "http://localhost:3030/"
-    // fetch(BASE_URL + "administradores")
-    // fetch(BASE_URL + "usuarios")
-    //   .then(res => {
-    //     if (res.ok) return res.json();
-    //     throw new Error(`${res.status}. ${res.statusText}`);
-    //   })
-    //   .then(data => {
-    //     // console.log("setcanchas");
-    //     setUsuarios(data);
-    //     // setCache((prevState) => ({ ...prevState, categories: data, }));
-    //     // console.log(data);
-    //   })
-    //   .catch(error => console.log(error)/* alert("ojo") */ /* err = setError(err) */)
   }, [])
   // console.log("hol",canchas);
 
