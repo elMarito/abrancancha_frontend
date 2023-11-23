@@ -256,7 +256,7 @@
       "nombre": "Sara López",
       "password": "tT@7890",
       "email": "sara@example.com",
-      "telefono": "111-222-3333",
+      "telefono": "111-222-0001",
       "estado": "activo"
     },
     {
@@ -410,53 +410,46 @@
       "estado": "pendiente"
     },
     {
-      "idUsuario": 1,
+      "idUsuario": 21,
       "idCancha": 2,
       "fecha": "2023-10-21T1:00:00Z",
       "estado": "confirmada",
       "id": 14
     },
     {
-      "idUsuario": 1,
+      "idUsuario": 21,
       "idCancha": 1,
       "fecha": "2023-10-21T06:00:00Z",
       "estado": "confirmada",
       "id": 15
     },
     {
-      "idUsuario": 1,
+      "idUsuario": 21,
       "idCancha": 2,
       "fecha": "2023-10-21T05:00:00Z",
       "estado": "confirmada",
       "id": 16
     },
     {
-      "idUsuario": 1,
+      "idUsuario": 21,
       "idCancha": 2,
       "fecha": "2023-10-21T08:00:00Z",
       "estado": "confirmada",
       "id": 17
     },
     {
-      "idUsuario": 1,
+      "idUsuario": 21,
       "idCancha": 1,
       "fecha": "2023-10-13T04:00:00Z",
       "estado": "confirmada",
       "id": 18
     },
     {
-      "idUsuario": 1,
+      "idUsuario": 21,
       "idCancha": 4,
       "fecha": "2023-10-13T05:00:00Z",
       "estado": "confirmada",
       "id": 19
-    },
-    {
-      "idUsuario": 1,
-      "idCancha": 3,
-      "fecha": "2023-11-22T04:00:00Z",
-      "estado": "confirmada",
-      "id": 20
     }
   ],
   "agendas": [

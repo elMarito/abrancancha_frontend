@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import NavBarBack from "./NavbarBack";
-import { ENDPOINTS, fetchDelete, fetchTranformTo } from "../../services/useFetch";
+import { ENDPOINTS, fetchDelete, fetchTranformTo, fetchUpdate } from "../../services/useFetch";
 import { AUTORIZATION_LEVEL } from "../LoginForm/Login";
 
 const Usuario = ({ autorizationLevel }) => {
   // function Usuario({ autorizationLevel }) {
-
+//TO DO: tambien habria q verificar que no pueda eliminar el usuario LOGUEADO
   const [users, setUsers] = useState([]);
   const [editingUser, setEditingUser] = useState(null);
 
-  const baseUrl = "http://localhost:3030/usuarios";
+  // const baseUrl = "http://localhost:3030/usuarios";
 
   const fetchUsers = async () => {
     try {
@@ -44,23 +44,27 @@ const Usuario = ({ autorizationLevel }) => {
   // };
 
   const deleteUser = async (userId) => {
-    if (window.confirm('¿Estás seguro de que quieres eliminar este jugador?')) {
+    if (window.confirm('¿Estás seguro de que quieres eliminar este usuario?')) {
       try {
-        fetchDelete(ENDPOINTS.usuarios, userId)
-        // fetchDelete(ENDPOINTS.administradores, userId)
-        const response = await fetch(`${baseUrl}/${userId}`, {
-          method: 'DELETE',
-        });
+        const response = await fetchDelete(ENDPOINTS.usuarios, userId)
+        // if (response.ok) {
+        // const response = await fetch(`${baseUrl}/${userId}`, {
+        // method: 'DELETE',
+        // });
         if (response.ok) {
+          // si es administrador, tambien hay q eliminarlo de la otra tabla
+          // const idAdministrador= getIdAdmin();
+          // fetchDelete(ENDPOINTS.administradores, userId)
+
           Swal.fire(
-            'Jugador eliminado',
-            'El jugador fue eliminado con éxito',
+            'Usuario eliminado',
+            'El usuario fue eliminado con éxito',
             'success',
           );
           // Actualizar la tabla después de eliminar
           fetchUsers();
         } else {
-          Swal.fire('Error', 'No se pudo eliminar al jugador', 'error');
+          Swal.fire('Error', 'No se pudo eliminar al usuario', 'error');
         }
       } catch (error) {
         console.error(error);
@@ -70,13 +74,14 @@ const Usuario = ({ autorizationLevel }) => {
 
   const updateUser = async (user) => {
     try {
-      const response = await fetch(`${baseUrl}/${user.id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(user),
-      });
+      const response = await fetchUpdate(ENDPOINTS.usuarios, user, user.id);
+      // const response = await fetch(`${baseUrl}/${user.id}`, {
+      //   method: 'PUT',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify(user),
+      // });
       if (response.ok) {
         Swal.fire(
           'Usuario editado',

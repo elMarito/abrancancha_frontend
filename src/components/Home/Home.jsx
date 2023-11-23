@@ -16,10 +16,10 @@ function Home({isAuthenticated}) {
         ? <Routes> <Route path="search" element={<Search />} /></Routes>
         //tambien se podria mostra "MIS RESERVAS Y MI PERFIL"
         : <>
-        <Banner/>
-        <Gallery/>
         </>
       }
+      <Banner/>
+      <Gallery/>
       <Footer />
     </>
   )

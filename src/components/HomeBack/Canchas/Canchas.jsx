@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import Cancha from "./Cancha";
 import { appContext } from "../../../context/appContext";
 import { ENDPOINTS, arrayToMap, fetchTranformTo, fetchCreate } from '../../../services/useFetch';
+import NavBarBack from "../NavbarBack";
 
 //-----------------------------------------------------------------------------
 const Canchas = () => {
@@ -20,9 +21,8 @@ const Canchas = () => {
         // if (tipo)     return { ...cancha, tipo: tipo.nombre    };          
         // return cancha;
       });
-      setCanchas(canchasMap);
-      // const allCanchas = await fetchTranformTo(ENDPOINTS.canchas);
       // falta filtrar las canchas del club x
+      setCanchas(canchasMap);
       // if (tipoCanchaElegido)
       //     setCanchas(allCanchas.filter(cancha => cancha.idTipo === tipoCanchaElegido));
       // else
@@ -33,31 +33,13 @@ const Canchas = () => {
   }
   useEffect(() => {
     fetchCanchas();
-    // const BASE_URL = "http://localhost:3030/"
-    // fetch(BASE_URL + ENDPOINTS.canchas)
-    //   .then(res => {
-    //     if (res.ok) return res.json();
-    //     throw new Error(`${res.status}. ${res.statusText}`);
-    //   })
-    //   .then(data => {
-    //     data = data.map((cancha) => {
-    //       return { ...cancha, tipo: tipos.get(cancha.idTipo) };
-    //       // const tipo = tipos.find((tipo) => tipo.id === cancha.idTipo);
-    //       // if (tipo)     return { ...cancha, tipo: tipo.nombre    };          
-    //       // return cancha;
-    //     });
-
-    //     setCanchas(data);
-    //     // setCache((prevState) => ({ ...prevState, categories: data, }));
-    //     // console.log(data);
-    //   })
-    //   .catch(error => console.log(error)/* alert("ojo") */ /* err = setError(err) */)
   }, [])
 
   if (canchas.lenght == 0) return (<></>);
 
   return (
     <>
+    <NavBarBack />
       <button type="button" className="edit btn btn-primary" >
         <i className="fa-regular fa-pen-to-square">Agregar cancha</i>
       </button>

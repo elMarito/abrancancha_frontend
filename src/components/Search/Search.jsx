@@ -172,7 +172,7 @@ const Search = () => {
             }).then((result) => {
                 if (result.isConfirmed) {
                     agregarReserva({
-                        "idUsuario": 1,
+                        "idUsuario": cache.user.id,
                         "idCancha": Number(btn.getAttribute('data-cancha-id')),
                         "fecha": `${fecha.split('T')[0]}T${btn.getAttribute('data-hora')}:00Z`,
                         "estado": "confirmada"

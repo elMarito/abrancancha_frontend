@@ -10,9 +10,9 @@ import Cronograma from './components/HomeBack/Cronograma'
 import Agenda from './components/HomeBack/Agenda'
 import Reservas from './components/HomeBack/Reservas'
 import Usuario from './components/HomeBack/Usuario'
-import Administradores from './components/HomeBack/Administradores'
 import Configuracion from './components/HomeBack/Configuracion'
 import { appContext } from './context/appContext';
+import Canchas from './components/HomeBack/Canchas/Canchas';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -28,16 +28,15 @@ function App() {
       <Routes>
         <Route path="/*" element={<Home isAuthenticated={autorizationLevel != AUTORIZATION_LEVEL.Administrator} />} />
         <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} /* setAutorizationLevel={setAutorizationLevel} */ />} />
-        {/* <Route path="buscar-canchas" element={<HomeB />} /> */}
         <Route element={<ProtectedRoute isAuthenticated={autorizationLevel === AUTORIZATION_LEVEL.Administrator} />}>
           <Route path="buscar-canchas" element={<HomeB />} />
           <Route path="cronograma" element={<Cronograma />} />
 
           <Route path="agenda" element={<Agenda />} />
+          <Route path="canchas" element={<Canchas />} />
           <Route path="reservas" element={<Reservas />} />
           <Route path="usuario" element={<Usuario autorizationLevel={AUTORIZATION_LEVEL.User} />} />
           <Route path="administradores" element={<Usuario autorizationLevel={AUTORIZATION_LEVEL.Administrator} />} />
-          {/* <Route path="administradores" element={<Administradores autorizationLevel={AUTORIZATION_LEVEL.Administrator}/>} /> */}
           <Route path="configuracion" element={<Configuracion />} />
         </Route>
       </Routes>
