@@ -116,7 +116,7 @@ export const fetchCreate = async (endPoint, newData) => {
 }
 export const fetchUpdate = async (endPoint, newData, idData) => {
     const response = await fetch(`${BASE_URL}/${endPoint}/${idData}`, {
-        method: 'POST',
+        method: 'PUT',
         headers: CONTENT_TYPE_APPLICATION_JSON,
         body: JSON.stringify(newData),
     });

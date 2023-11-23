@@ -34,6 +34,9 @@ function NavBarBack() {
               {/* <NavLink to="/agenda" className="btn btn-outline-success " aria-current="page">
                 Agenda
               </NavLink> */}
+              <NavLink to="/canchas" className="btn btn-outline-success " aria-current="page">
+                Canchas
+              </NavLink>
 
               <NavLink to="/reservas" className="btn btn-outline-success" aria-current="page">
                 Reservas
