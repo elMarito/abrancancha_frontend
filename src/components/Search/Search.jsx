@@ -1,18 +1,21 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { ENDPOINTS, arrayToMap, fetchTranformTo, fetchCreate, fetchDelete } from '../../services/useFetch';
 import CanchaConTurnos from './CanchaConTurnos';
+import { appContext } from '../../context/appContext';
+import { useNavigate } from "react-router-dom";
 
-// const Search = ({tipoCanchaElegido, fechaElegida, horaElegida}) => {
 const Search = () => {
-    const [tipoCanchaElegido, setTipoCancha] = useState(1);
-    const [fechaElegida, setFecha] = useState("2023-10-21T10:00:00Z");
-    const [horaElegida, setHora] = useState("10:00");
-    const loggedUserId = 1;
+    const { cache, setCache } = useContext(appContext);
+    const { tipoCancha, fecha, hora } = cache.filtros;
+    // const loggedUserId = cache.user.id; cache.user? cache.user.autorizationLevel : 0;
+    // const loggedUserId = 1;
+    const navigate = useNavigate();
 
     const [refreshReservas, setRefreshReservas] = useState(false);
     const [reservas, setReservas] = useState([]);
     const [canchas, setCanchas] = useState([]);
-
+    let reservasXFecha;
+    let canchasXTipo;
     //filtrar por tipo de cancha o no
     // fecha y/o hora
     // mostrar canchas y horarios libres del dia elegido
@@ -25,8 +28,9 @@ const Search = () => {
             // const canchasMap = await fetchTranformTo( ENDPOINTS.canchas, arrayToMap);
             const allCanchas = await fetchTranformTo(ENDPOINTS.canchas);
             // falta filtrar las canchas del club x
-            if (tipoCanchaElegido)
-                setCanchas(allCanchas.filter(cancha => cancha.idTipo === tipoCanchaElegido));
+            // const tipoCanchaElegido = cache.filtros.tipoCancha;
+            if (tipoCancha > 0)
+                setCanchas(allCanchas.filter(cancha => cancha.idTipo === tipoCancha));
             else
                 setCanchas(allCanchas);
         } catch (error) {
@@ -35,27 +39,37 @@ const Search = () => {
     }
     const fetchReservas = async () => {
         try {
-            const allReservas = await fetchTranformTo("reservas");
+            const allReservas = await fetchTranformTo(ENDPOINTS.reservas);
             // aplicar filtros
             // dataReservas.map(/**filtrar x fecha x tipo de cancha */)
 
             // filtrar todas x fecha o filtrar despues cada vez q cambio de cancha
-            const reservasFiltradas = allReservas.filter(reserva => reserva.fecha === fechaElegida);
-            setReservas(allReservas);
+            const reservasFiltradas = allReservas.filter(reserva => esLaFechaElegida(reserva.fecha));
+            // const reservasFiltradas = allReservas.filter(reserva => reserva.fecha === fecha);
+            setReservas(reservasFiltradas);
+            // console.log("reservas.lenght:", reservas.lenght);
         } catch (error) {
             console.log(error)/* alert("ojo") */ /* err = setError(err) */
         }
     };
     useEffect(() => {
         fetchCanchas();
-    }, [tipoCanchaElegido])
+    }, [tipoCancha])
     //-------------------------------------------------------------------------
-
     useEffect(() => {
         fetchReservas();
-    }, [])
+    }, [fecha])
     // }, [refreshReservas, fechaElegida])
 
+    const esLaFechaElegida = (fechaReserva) => {
+        // console.log(fechaReserva , fecha);
+        // console.log("-*-+-+-", fechaReserva.split('T')[0], fecha.split('T')[0]);
+        return fechaReserva.split('T')[0] === fecha.split('T')[0];
+        // return fechaReserva.split('T')[0] === fecha;
+    }
+    //---------------------------------------------------------------------------
+    if (!canchas.length) return <h2>Cargando datos...</h2>;
+    //-------------------------------------------------------------------------
     const reservasByCancha = (reservas, idCancha/* , fecha */) => {
         const data = reservas.filter(reserva => {
             return reserva.idCancha === idCancha //&& reserva.fecha === fecha;
@@ -68,6 +82,36 @@ const Search = () => {
     const handleAction = (event) => {
         const btn = event.target.closest('button');
         if (btn === null) return
+
+        // console.log( cache.user);
+        if (cache.user === null) {
+            // if (usuarioId != loggedUserId) {
+            Swal.fire({
+                title: 'Reservas',
+                html: `Aun no estas logeado <br>
+                    debes iniciar sesion para continuar <br><br>
+                    ¿Deseas loguearte ?`,
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: `<i class="fa fa-thumbs-down"></i> Si!`,
+                confirmButtonAriaLabel: "Si!"
+            }).then((result) => {
+                if (result.isConfirmed)
+                    navigate("/login");
+            });
+            
+            return
+        // } else if (cache.user.id != loggedUserId) {
+        //     Swal.fire({
+        //         title: 'Horario no disponible',
+        //         text: "Esta reservado por otro usuario.",
+        //         icon: 'warning',
+        //         showConfirmButton: false,
+        //         timer: 1500
+        //     })
+        //     return
+        }
+
         // console.log(btn.getAttribute('data-cancha-id'));
         // console.log(btn.getAttribute('data-fecha'));
 
@@ -76,12 +120,13 @@ const Search = () => {
         // else if (btn.classList.contains('botonBorrar')) {
         if (btn.classList.contains('view')) {
             const usuarioId = Number(btn.getAttribute('data-usuario-id'));
-// console.log(loggedUserId,"usuarioId",usuarioId);
-            if (usuarioId === loggedUserId) {
+            // console.log(loggedUserId,"usuarioId",usuarioId);
+            // if (usuarioId === loggedUserId) {
+            if (usuarioId === cache.user.id) {
                 Swal.fire({
                     title: 'Turno Reservado por ti',
                     html: `Tienes una reserva en la cancha: <b><u> ${btn.getAttribute('data-cancha-nombre')} </u></b> <br>
-                        el dia <b><u> viernes ## de agosto </u></b> <br>
+                        el dia <b><u> ${fecha.split('T')[0]} </u></b> <br>
                         a las <b><u> ${btn.getAttribute('data-hora')} horas</u></b> <br><br>
                         ¿Deseas cancelarla ?`,
                     icon: 'question',
@@ -98,7 +143,14 @@ const Search = () => {
                 });
             }
             else
-                return
+            Swal.fire({
+                title: 'Horario no disponible',
+                text: "Esta reservado por otro usuario.",
+                icon: 'warning',
+                showConfirmButton: false,
+                timer: 1500
+            })
+                // return
             // Swal.fire({
             //     title: 'Horario no disponible',
             //     text: "Esta accion no se puede deshacer!",
@@ -113,7 +165,7 @@ const Search = () => {
             Swal.fire({
                 title: 'Reservar de Turno',
                 html: `Desea reservar la cancha: <b><u> ${btn.getAttribute('data-cancha-nombre')} </u></b> <br>
-                    el dia <b><u> viernes ## de agosto </u></b> <br>
+                    el dia <b><u> ${fecha.split('T')[0]} </u></b> <br>
                     a las <b><u> ${btn.getAttribute('data-hora')} horas</u></b> ?`,
                 icon: 'question',
                 showCancelButton: true,
@@ -122,7 +174,7 @@ const Search = () => {
                     agregarReserva({
                         "idUsuario": 1,
                         "idCancha": Number(btn.getAttribute('data-cancha-id')),
-                        "fecha": `2023-10-21T${btn.getAttribute('data-hora')}:00Z`,
+                        "fecha": `${fecha.split('T')[0]}T${btn.getAttribute('data-hora')}:00Z`,
                         "estado": "confirmada"
                     })
                     // Swal.fire({
@@ -165,7 +217,7 @@ const Search = () => {
                     text: 'La reserva fue realizada con éxito',
                     showConfirmButton: false,
                     timer: 1500
-                  });
+                });
             } else {
                 Swal.fire({
                     icon: 'error',
@@ -203,7 +255,7 @@ const Search = () => {
                     text: 'La reserva fue cancelada con éxito',
                     showConfirmButton: false,
                     timer: 1500
-                  });
+                });
             } else {
                 Swal.fire({
                     icon: 'error',
@@ -221,11 +273,12 @@ const Search = () => {
         }
     }
 
-    if (canchas.lenght == 0) return (<></>);
+    // if (canchas.lenght == 0) return (<></>);
     return (
         <>
             {/* <NavBarBack/> */}
-
+            {/* {console.log(cache.filtros)}; */}
+            {/* <h1>tipoCanchaElegido: {tipoCancha} - fechaElegida: {fecha} - horaElegida: {hora}</h1> */}
             <table className="table table-sm table-hover">
                 <thead><tr>
                     <th className='bg-light'>Referencias:</th>

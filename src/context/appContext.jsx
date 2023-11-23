@@ -1,8 +1,9 @@
+/* eslint-disable react/prop-types */
 import { createContext, useState, useEffect, useContext } from "react";
-import DbAdapter, { getAllData2 } from "../services/dbAdapter";
+// import DbAdapter, { getAllData2 } from "../services/dbAdapter";
 // import ErrorMsg from "../components/ErrorMsg";
-import { fetchTranformTo, useFetch } from "../services/useFetch";
-import { AUTORIZATION_LEVEL } from "../components/LoginForm/Loginform";
+import { ENDPOINTS, fetchTranformTo, useFetch } from "../services/useFetch";
+import { AUTORIZATION_LEVEL } from "../components/LoginForm/Login";
 
 export const appContext = createContext({});
 // export const appContext = createContext({dbAdapter: new DbAdapter(BASE_URL),
@@ -10,22 +11,14 @@ export const appContext = createContext({});
 //   tiposCancha: new Map()});
 
 export const AppContextProvider = ({ children }) => {
-  // const [products, setProducts] = useState([]);
-  // const [error, setError] = useState(null);
 
-
-  //       {error && <li>Error: {error}</li>}
-  //         {loading && <li>Loading...</li>}
-  //         {data?.map((item) => (
-  //           <li key={item.id}>{item.title}</li>
-  //         ))}
-  // const [cache, setCache] = useState({
-  //   dbAdapter: useFetch(BASE_URL)
   const BASE_URL = "http://localhost:3030/"
   const [cache, setCache] = useState({
-    dbAdapter: new DbAdapter(BASE_URL),
+    // dbAdapter: new DbAdapter(BASE_URL),
     user: null,
-    tiposCancha: new Map()
+    tiposCancha: new Map(),
+    filtros: { tipoCancha: 0, fecha: new Date().toISOString(), hora: "" }
+    // filtros: { tipoCancha: 0, fecha: new Date().toISOString().split('T')[0], hora: "" }<-esto atrasa la fecha
   });
 
   const getTiposCancha = async () => {
@@ -38,7 +31,6 @@ export const AppContextProvider = ({ children }) => {
       console.log(error)/* alert("ojo") */ /* err = setError(err) */
     }
   }
-  
   useEffect(() => {
     getTiposCancha()
     // fetch(BASE_URL + "tipos_cancha")
@@ -100,8 +92,8 @@ export const useAuth = (autorizationLevel) => {
   let user = cache.user;
   useEffect(
 
-    ()=>console.log("anda¿")
-    ,[])
+    () => console.log("anda¿")
+    , [])
   return user !== null && user.autorizacion === autorizationLevel;
 };
 

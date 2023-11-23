@@ -1,45 +1,58 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { NavLink,Navigate } from 'react-router-dom';
+import { appContext } from '../../context/appContext';
+import { cerrarSesion } from '../Navbar/Navbar';
 
 function NavBarBack() {
+  const { cache, setCache } = useContext(appContext);
 
-  const Outsesion=()=>{
-    window.location.reload();
+  const Outsesion = () => {
+    // const { cache, setCache } = useContext(appContext);
+    setCache((prevState) => ({ ...prevState, user: null }));
+    // cerrarSesion();
+    // window.location.reload();
   }
   return (
     <>
+    {/* {cache.user && (
+          <Navigate to="/dashboard" replace={true} />
+        )} */}
       <nav className="navbar navbar-expand-lg  static-top">
         <div className="container">
-         
-          <Link to='/' className="navbar-brand"><img src="src/assets/abc_logo.svg" alt="" width="90" /></Link>
+
+          <NavLink to='/' className="navbar-brand"><img src="src/assets/abc_logo.svg" alt="" width="90" /></NavLink>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span className="navbar-toggler-icon"></span>
-            </button>
-            <div className="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
             <ul className="navbar-nav">
-            
-            <Link to="/cronograma" className="nav-link" aria-current="page">
-              <button className="btn btn-outline-success">Cronograma</button>
-            </Link>
-  
-            <Link to="/agenda" className="nav-link" aria-current="page">
-              <button className="btn btn-outline-success me-2">Disponibilidad/Agenda</button>
-            </Link>
-            <Link to="/reservas" className="nav-link" aria-current="page">
-              <button className="btn btn-outline-success me-2">Reservas</button>
-            </Link>
-            <Link to="/usuario" className="nav-link" aria-current="page">
-              <button className="btn btn-outline-success me-2">Usuario</button>
-            </Link>
-            
-            <Link to="/configuracion" className="nav-link" aria-current="page">
-              <button className="btn btn-outline-success">Configuración</button>
-            </Link>
-            
-            <button onClick={Outsesion} className="btn btn-outline-success">Cerrar sesión</button>
-            
-          </ul>
-        </div>
+
+              {/* <NavLink to="/cronograma" className=" btn btn-outline-success" aria-current="page">
+                Cronograma
+              </NavLink> */}
+
+              {/* <NavLink to="/agenda" className="btn btn-outline-success " aria-current="page">
+                Agenda
+              </NavLink> */}
+
+              <NavLink to="/reservas" className="btn btn-outline-success" aria-current="page">
+                Reservas
+              </NavLink>
+              <NavLink to="/administradores" className="btn btn-outline-success " aria-current="page">
+                Administradores
+              </NavLink>
+              <NavLink to="/usuario" className="btn btn-outline-success " aria-current="page">
+                Usuarios
+              </NavLink>
+
+              {/* <NavLink to="/configuracion" className="btn btn-outline-success" aria-current="page">
+                Configuración
+              </NavLink> */}
+
+              <button onClick={Outsesion} className="btn btn-outline-success">Cerrar sesión</button>
+
+            </ul>
+          </div>
         </div>
       </nav>
     </>

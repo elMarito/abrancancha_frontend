@@ -12,6 +12,10 @@
   margin-top: 5%;
 }
 
+.text-bg-dark {
+  position: relative;
+}
+
 h4.card-title,
 p.card-text {
   font-size: 4em;

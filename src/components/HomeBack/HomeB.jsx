@@ -10,7 +10,7 @@ function HomeB() {
         <NavBarBack />
       </header>
       <main id="body">
-        <Banner/>
+        {/* <Banner/> */}
         <Footer/>
       </main>
     </div>

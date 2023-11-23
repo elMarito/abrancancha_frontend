@@ -6,3 +6,6 @@ td {
 .btn {
   margin: 10px;
 }
+.active {
+  background-color: tomato;
+}

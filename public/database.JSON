@@ -28,14 +28,26 @@
   "tipos_cancha": [
     {
       "id": 1,
-      "nombre": "Fútbol"
+      "nombre": "Futbol  5"
     },
     {
       "id": 2,
-      "nombre": "Pádel"
+      "nombre": "Futbol  7"
     },
     {
       "id": 3,
+      "nombre": "Futbol  9"
+    },
+    {
+      "id": 4,
+      "nombre": "Futbol 11"
+    },
+    {
+      "id": 5,
+      "nombre": "Padel"
+    },
+    {
+      "id": 6,
       "nombre": "Tenis"
     }
   ],
@@ -112,31 +124,7 @@
   ],
   "usuarios": [
     {
-      "id": 1,
-      "nombre": "Usuario Uno",
-      "password": "aA@1234",
-      "email": "usuario1@example.com",
-      "telefono": "123-456-7890",
-      "estado": "activo"
-    },
-    {
-      "id": 2,
-      "nombre": "Usuario Dos",
-      "password": "bB@5678",
-      "email": "usuario2@example.com",
-      "telefono": "987-654-3210",
-      "estado": "inactivo"
-    },
-    {
-      "id": 3,
-      "nombre": "María Rodríguez",
-      "password": "cC@9012",
-      "email": "maria@example.com",
-      "telefono": "555-555-5555",
-      "estado": "activo"
-    },
-    {
-      "id": 4,
+      "id": 25,
       "nombre": "Carlos Martínez",
       "password": "dD@3456",
       "email": "carlos@example.com",
@@ -274,7 +262,7 @@
     {
       "id": 21,
       "nombre": "Manuel Pérez",
-      "password": "uU@1234",
+      "password": "12345678",
       "email": "manuel@example.com",
       "telefono": "444-555-6666",
       "estado": "activo"
@@ -302,6 +290,34 @@
       "email": "marta@example.com",
       "telefono": "999-888-7777",
       "estado": "inactivo"
+    },
+    {
+      "email": "mariop@gmail.com",
+      "password": "12345678",
+      "nombre": "Mario",
+      "telefono": "5555",
+      "id": 4
+    },
+    {
+      "email": "nicom@example.com",
+      "password": "555",
+      "nombre": "Mario",
+      "telefono": "2244445077",
+      "id": 3
+    },
+    {
+      "email": "jcarlos@gmail.com",
+      "password": "2",
+      "nombre": "Juan carlos",
+      "telefono": "1414124111",
+      "id": 2
+    },
+    {
+      "email": "pepebanchi77@hotmail.com",
+      "password": "agub75077",
+      "nombre": "Agustin",
+      "telefono": "224444507",
+      "id": 1
     }
   ],
   "administradores": [
@@ -313,6 +329,16 @@
     {
       "id": 2,
       "idUsuario": 2,
+      "idClub": 102
+    },
+    {
+      "id": 3,
+      "idUsuario": 3,
+      "idClub": 102
+    },
+    {
+      "id": 4,
+      "idUsuario": 4,
       "idClub": 102
     }
   ],
@@ -389,6 +415,48 @@
       "fecha": "2023-10-21T1:00:00Z",
       "estado": "confirmada",
       "id": 14
+    },
+    {
+      "idUsuario": 1,
+      "idCancha": 1,
+      "fecha": "2023-10-21T06:00:00Z",
+      "estado": "confirmada",
+      "id": 15
+    },
+    {
+      "idUsuario": 1,
+      "idCancha": 2,
+      "fecha": "2023-10-21T05:00:00Z",
+      "estado": "confirmada",
+      "id": 16
+    },
+    {
+      "idUsuario": 1,
+      "idCancha": 2,
+      "fecha": "2023-10-21T08:00:00Z",
+      "estado": "confirmada",
+      "id": 17
+    },
+    {
+      "idUsuario": 1,
+      "idCancha": 1,
+      "fecha": "2023-10-13T04:00:00Z",
+      "estado": "confirmada",
+      "id": 18
+    },
+    {
+      "idUsuario": 1,
+      "idCancha": 4,
+      "fecha": "2023-10-13T05:00:00Z",
+      "estado": "confirmada",
+      "id": 19
+    },
+    {
+      "idUsuario": 1,
+      "idCancha": 3,
+      "fecha": "2023-11-22T04:00:00Z",
+      "estado": "confirmada",
+      "id": 20
     }
   ],
   "agendas": [
