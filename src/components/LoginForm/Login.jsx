@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import './LoginStyles.css';
 import Navbar from '../Navbar/Navbar';
 import Footer from '../Footer/Footer';
-
+import { useNavigate } from 'react-router-dom';
 import { ENDPOINTS, fetchCreate, fetchTranformTo } from '../../services/useFetch';
 import { appContext } from '../../context/appContext';
 export const AUTORIZATION_LEVEL = {
@@ -12,10 +12,10 @@ export const AUTORIZATION_LEVEL = {
 };
 const Login = ({ setIsAuthenticated/* , setAutorizationLevel */ }) => {
   const { cache, setCache } = useContext(appContext);
-
+  const [nombre, setNombre] = useState('')
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  const [telefono, setTelefono] = useState(''); 
   const [isRegistering, setIsRegistering] = useState(false);
   const navigate = useNavigate();
 

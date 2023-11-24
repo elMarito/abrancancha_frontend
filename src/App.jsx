@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './components/HomeBack/homeback.css'
+import Contacto from './components/Footer/Contacto';
+import PreguntasFrecuentes from './components/Footer/PreguntasFrecuentes';
+
 
 import Home from './components/Home/Home';
 import Login, { AUTORIZATION_LEVEL } from './components/LoginForm/Login';
@@ -40,7 +43,7 @@ function App() {
           <Route path="configuracion" element={<Configuracion />} />
           
         </Route>
-        <Route path="contacto" element={<Contacto />} />
+        <Route path="contacto" element={<Contacto/>} />
         <Route path="preguntas-frecuentes" element={<PreguntasFrecuentes />} />
       </Routes>
     </BrowserRouter>
