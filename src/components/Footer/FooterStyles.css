@@ -1,4 +1,7 @@
+/* FooterStyles.css */
+
 .footer-container {
+  margin-top: auto;
   background-color: #1d1d1d;
   color: #fff;
   padding: 20px;
@@ -7,12 +10,35 @@
   align-items: center;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+
+
 .left-section, .center-section, .right-section {
   flex: 1;
 }
 
-.left-section h5, .center-section p {
-  margin-bottom: 10px;
+.left-section, .right-section {
+  display: flex;
+}
+
+.left-section > div, .right-section > div {
+  margin-right: 20px;
+}
+
+.contact-section a, .faq-section a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 16px;
+  transition: color 0.3s ease-in-out;
+}
+
+.contact-section a:hover, .faq-section a:hover {
+  color: #77da7e;
 }
 
 .center-section {
@@ -22,11 +48,15 @@
   text-align: center;
 }
 
+.center-section p {
+  margin-bottom: 10px;
+}
+
 .right-section {
   display: flex;
   justify-content: flex-end;
-  align-items: center;
 }
+
 .social-logos {
   padding: 5px;
   display: flex;
@@ -36,18 +66,27 @@
 .social-logo {
   width: 30px;
   height: 30px;
-  margin-right: 5px; 
+  margin-right: 5px;
 }
-
-
 
 .social-icon {
   width: 30px;
   height: 30px;
-  margin-right: 5px; 
-  color: #77da7e; 
+  margin-right: 5px;
+  color: #77da7e;
 }
 
 .social-text {
-  font-size: 14px; 
+  font-size: 14px;
+}
+/* FooterStyles.css */
+.left-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Alinea los elementos a la izquierda */
+}
+
+.contact-section,
+.faq-section {
+  margin-bottom: 10px; /* Espaciado entre las secciones */
 }

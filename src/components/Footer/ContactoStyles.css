@@ -1,0 +1,63 @@
+/* ContactoStyles.css */
+
+.contacto-container {
+  background-color: #f0f0f0; 
+  padding: 40px;
+  border-radius: 10px;
+  color: #1d1d1d;
+  font-family: "Inter", sans-serif;
+  text-align: center;
+}
+
+.contacto-container h2 {
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+  color: #77da7e; 
+}
+
+form {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 30px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #1d1d1d;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #1d1d1d;
+  border-radius: 8px;
+  font-family: "Inter", sans-serif;
+  box-sizing: border-box;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+button {
+  background-color: #1d1d1d;
+  color: #fff;
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 900;
+  border: none;
+  padding: 15px 40px;
+  border-radius: 8px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0f0f0f; 
+}

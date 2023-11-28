@@ -31,7 +31,6 @@ export const AppContextProvider = ({ children }) => {
       console.log(error)/* alert("ojo") */ /* err = setError(err) */
     }
   }
-
   useEffect(() => {
     getTiposCancha()
     // fetch(BASE_URL + "tipos_cancha")
